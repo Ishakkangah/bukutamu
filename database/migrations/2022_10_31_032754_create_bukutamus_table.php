@@ -12,7 +12,6 @@ class CreateBukutamusTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('instansi');
-            $table->date('date');
             $table->text('perihal');
             $table->string('tujuan');
             $table->string('keterangan')->nullable();

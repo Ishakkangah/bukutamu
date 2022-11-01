@@ -1,18 +1,14 @@
 <?php
 
+use App\Http\Controllers\BukutamuController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BukutamuController::class, 'index']);
+Route::get('cari', [BukutamuController::class, 'cari'])->name('cari');
+Route::get('/create', [BukutamuController::class, 'create'])->name('bukutamu.create');
+Route::patch('/store', [BukutamuController::class, 'store'])->name('store');
+Route::get('/{bukutamu:id}/edit', [BukutamuController::class, 'edit'])->name('edit');
+Route::patch('/{bukutamu:id}/edit', [BukutamuController::class, 'update'])->name('update');
+Route::delete('/{bukutamu:id}/edit', [BukutamuController::class, 'destroy'])->name('delete');
+Route::get('/{bukutamu:id}/detailsTamu', [BukutamuController::class, 'detailsTamu'])->name('detailsTamu');
