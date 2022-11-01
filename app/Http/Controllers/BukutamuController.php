@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\bukutamu;
 use App\Http\Requests\UpdatebukutamuRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PDF;
+use PhpParser\Node\Stmt\TryCatch;
 
 class BukutamuController extends Controller
 {
     // INDEX
     public function index()
     {
-        $bukutamus = bukutamu::latest()->paginate(5);
+        $bukutamus = bukutamu::latest()->select(['name', 'instansi', 'perihal', 'created_at'])->paginate(5);
         return view('bukutamu.index', compact('bukutamus'));
     }
 
@@ -89,10 +92,65 @@ class BukutamuController extends Controller
         return redirect('/')->with('success', 'Tamu berhasil di ubah!');
     }
 
+    // DESTROY
     public function destroy(bukutamu $bukutamu)
     {
         $bukutamu->delete();
         session()->flash('success', 'Data tamu atas nama' . $bukutamu->name . 'berhasil dihapus !');
         return redirect()->to('/');
+    }
+
+
+    // TOTAL TAMU HARI INI
+    function totalTamuHariIni(Request $request)
+    {
+        $data = bukutamu::select('id', 'name', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->whereDate('created_at', Carbon::now())->paginate(20);
+        return view('bukutamu.totalTamuHariIni', compact('data'));
+    }
+
+    // CETAK BUKU TAMU HARI INI PDF
+    function cetakDaftarTamuHariIni_PDF()
+    {
+        $data = bukutamu::select('id', 'name', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->whereDate('created_at', Carbon::now())->get();
+        $pdf =  PDF::loadview('bukutamu.cetakTamuHariIni', ['data' => $data]);
+        return $pdf->download('laporan-buku-tamu-pdf');
+    }
+
+
+
+    // TOTAL TAMU BULAN INI
+    function totalTamuBulanIni(Request $request)
+    {
+        $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $hariPertama = Carbon::now()->startOfWeek();
+        $hariTerakhir = Carbon::now()->endOfWeek();
+        return view('bukutamu.totalTamuBulanIni', compact('data', 'hariPertama', 'hariTerakhir'));
+    }
+
+
+    // CETAK BUKU TAMU BULAN INI PDF
+    function cetakBukuTamuMingguIni()
+    {
+        $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $pdf =  PDF::loadview('bukutamu.cetakBukuTamuMingguIni', ['data' => $data]);
+
+        return $pdf->download('laporan-buku-tamu pdf');
+    }
+
+
+    // CETAK BUKU TAMU BERDASARKAN PILIHAN 
+    function cetakBukuTamuBerdasarkanPilihan(Request $request)
+    {
+        $request->validate([
+            'tanggal_mulai' => 'required|date',
+            'sampai_tanggal' => 'required|date'
+        ]);
+
+        $data = bukutamu::whereBetween('created_at', [$request->tanggal_mulai, $request->sampai_tanggal])->paginate(20);
+        $tanggal_mulai = $request->tanggal_mulai;
+        $sampai_tanggal = $request->sampai_tanggal;
+        $pdf = PDF::loadview('bukutamu.cetakBukuTamuBerdasarkanPilihan', compact('data'));
+
+        return $pdf->download('tamuBerdasarkanPilihan');
     }
 }

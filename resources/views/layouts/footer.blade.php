@@ -1,5 +1,5 @@
 <!-- Footer-->
-<footer class="py-3 bg-dark  mt-5">
+<footer class="pt-3 bg-dark fixed-bottom">
     <div class="container">
         <p class="m-0 text-center text-white"> &copy; KOMINFO OKI <?= date('d-M-y') ?></p>
     </div>

@@ -5,13 +5,15 @@
     <div class="container my-5">
 
         <h3>Tambah tamu baru</h3>
+        <div class="alert alert-success rounded shadow-sm">Harap di isi dengan sebenar-benar nya dikolom yang sudah
+            disediakan</div>
         <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
             @method('patch')
             @csrf
 
             <div class="mb-3">
                 <label for="name" class="form-label">name</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Masukan email"
+                <input type="text" class="form-control" name="name" id="name" placeholder="Masukan nama"
                     value="{{ old('name') }}">
                 @error('name')
                     <small class="text-danger">
@@ -64,4 +66,5 @@
             </div>
         </form>
     </div>
+    @include('layouts.footer')
 @endsection
