@@ -11,17 +11,21 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <h4 class="mb-2 text-center">LOGIN</h4>
+                        <h4 class="mb-2 text-center ">MASUK</h4>
                         <div class="col-md-12">
-                            <label for="email" class=" col-form-label text-md-end">Email</label>
+                            <label for="username" class=" col-form-label text-md-end">Nama pengguna</label>
                             <div class="col-md-12">
-                                <input id="email" type="email"
-                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" placeholder="Masukan email" required>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <select id="username" class="form-control " name="username" value="{{ old('username') }}">
+                                    <option disabled selected>Pilih salah satu!</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->username }}">{{ $user->username }}</option>
+                                    @endforeach
+                                </select>
+                                @error('username')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2" role="alert">
+                                            {{ $message }}</div>
+                                    </small>
                                 @enderror
                             </div>
                         </div>
@@ -29,14 +33,14 @@
                         <div class="col-md-12">
                             <label for="password" class="col-form-label text-md-end">Kata sandi</label>
                             <div class="col-md-12">
-                                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                                <input id="password" type="password" class="form-control" name="password" required
                                     autocomplete="current-password" placeholder="Masukan kata sandi">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <small class="text-danger">
+                                        <div class=" bg-danger rounded text-white mt-1 px-2 py-2" role="alert">
+                                            {{ $message }}</div>
+                                    </small>
                                 @enderror
                             </div>
                         </div>
@@ -46,12 +50,6 @@
                             <button type="submit" class="btn btn-primary mx-1">
                                 Masuk
                             </button>
-
-                            {{-- @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Lupa password
-                                        </a>
-                                    @endif --}}
                         </div>
                     </form>
                 </div>

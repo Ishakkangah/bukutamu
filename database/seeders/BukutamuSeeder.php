@@ -14,11 +14,12 @@ class BukutamuSeeder extends Seeder
   public function run()
   {
     bukutamu::create([
-      'name' => 'admin',
-      'instansi' => 'kominfo',
-      'perihal' => 'dukungan',
-      'tujuan' => 'menghadiri',
-      'keterangan' => ''
+      'name' => 'TESING NAMA',
+      'thumbnail' => '',
+      'instansi' => 'TESTING INSTANSI',
+      'perihal' => 'TESTING PERIHAL',
+      'tujuan' => 'TESTING TUJUAN',
+      'keterangan' => 'TESTING KET'
     ]);
   }
 }

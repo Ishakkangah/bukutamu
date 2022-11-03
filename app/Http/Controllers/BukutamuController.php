@@ -6,6 +6,7 @@ use App\Models\bukutamu;
 use App\Http\Requests\UpdatebukutamuRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PDF;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -39,12 +40,14 @@ class BukutamuController extends Controller
     {
         $request->validate([
             'name' => 'required|max:200',
+            'thumbnail' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'instansi' => 'required|max:200',
             'perihal' => 'required|max:200',
             'tujuan' => 'required|max:200',
             'keterangan' => 'required|present'
         ]);
-
+        $thumbnail = request()->file('thumbnail') ? request()->file('thumbnail')->store('images/bukutamu') : null; // 2
+        $attr['thumbnail'] = $thumbnail;
         $attr["name"] = strtoupper($request->name);
         $attr["instansi"] = strtoupper($request->instansi);
         $attr["perihal"] = strtoupper($request->perihal);
@@ -52,7 +55,7 @@ class BukutamuController extends Controller
         $attr["keterangan"] = strtoupper($request->keterangan);
 
         bukutamu::create($attr);
-        return redirect('/')->with('success', 'Tamu berhasil di tambahkan');
+        return redirect('/')->with('success', 'Data berhasil di tambahkan');
     }
 
     // DETAIL DATA TAMU
@@ -74,13 +77,19 @@ class BukutamuController extends Controller
     {
         $request->validate([
             'name' => 'required|max:200',
+            'thumbnail' => 'image|mimes:jpeg,jpg,png|max:2048',
             'instansi' => 'required|max:200',
             'perihal' => 'required|max:200',
             'tujuan' => 'required|max:200',
             'keterangan' => 'required|present'
         ]);
 
-
+        if ($request->file('thumbnail')) {
+            Storage::delete($bukutamu->thumbnail);
+            $attr['thumbnail'] = $request->file('thumbnail')->store('images/bukutamu');
+        } else {
+            $attr["thumbnail"] = $bukutamu->thumbnail;
+        }
 
         $attr["name"] = $request->name;
         $attr["instansi"] = $request->instansi;
@@ -89,14 +98,15 @@ class BukutamuController extends Controller
         $attr["keterangan"] = $request->keterangan;
 
         $bukutamu->update($attr);
-        return redirect('/')->with('success', 'Tamu berhasil di ubah!');
+        return back()->with('success', 'Tamu berhasil di ubah!');
     }
 
     // DESTROY
     public function destroy(bukutamu $bukutamu)
     {
+        Storage::delete($bukutamu->thumbnail);
         $bukutamu->delete();
-        session()->flash('success', 'Data tamu atas nama' . $bukutamu->name . 'berhasil dihapus !');
+        session()->flash('success', 'Data tamu atas nama ' . $bukutamu->name . ' berhasil dihapus !');
         return redirect()->to('/');
     }
 

@@ -31,10 +31,12 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ strtoupper(Auth::user()->name) }}
+                            <img class="rounded-circle mr-2" src="https://www.gravatar.com/avatar/" width="25px"
+                                height="25px">
+                            <span>{{ strtoupper(Auth::user()->name) }}</span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
