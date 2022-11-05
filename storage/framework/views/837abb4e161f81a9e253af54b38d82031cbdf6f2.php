@@ -67,6 +67,10 @@ unset($__errorArgs, $__bag); ?>
                     <a href="<?php echo e(route('create')); ?>" class="btn btn-success fw-bold my-1 mx-1 shadow"> <i
                             class="bi bi-person-plus-fill"></i> PENGUNJUNG</a>
                 <?php endif; ?>
+                <?php if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2): ?>
+                    <a href="<?php echo e(route('register')); ?>" class="btn btn-success fw-bold my-1 mx-1 shadow"> <i
+                            class="bi bi-person-plus-fill"></i> TAMBAH USER</a>
+                <?php endif; ?>
             </div>
 
             <div class="input-group mb-3 shadow-sm">
@@ -114,28 +118,29 @@ unset($__errorArgs, $__bag); ?>
                                 <td>
                                     
                                     <div class="d-flex justify-content-center">
+                                        
+                                        <a href="<?php echo e(route('detailsTamu', $bukutamu->id)); ?>"
+                                            class="bg-info px-2 py-2 rounded text-white "><i class="bi bi-eye"></i></a>
+
+
                                         <?php if(auth()->user()->role_id === 3): ?>
+                                            
+                                            <a href="<?php echo e(route('edit', $bukutamu->id)); ?>"
+                                                class="bg-primary px-2 py-2 rounded text-white mx-2"><i
+                                                    class="bi bi-pencil-fill"></i></a>
+
+                                            
                                             <form action="<?php echo e(route('delete', $bukutamu->id)); ?>" method="post"
                                                 class="">
                                                 <?php echo csrf_field(); ?>
                                                 <?php echo method_field('delete'); ?>
                                                 <button type="submit"
-                                                    class="bg-danger px-2 py-2 rounded text-white border-0"
-                                                    onclick="alert(`yakin anda ingin menghapus data ini ? `)"><i
+                                                    class="bg-danger px-2 py-2 rounded text-white border-0"><i
                                                         class="bi bi-archive-fill"></i></button>
                                             </form>
-
-
-                                            
-                                            <a href="<?php echo e(route('edit', $bukutamu->id)); ?>"
-                                                class="bg-primary px-2 py-2 rounded text-white mx-2"><i
-                                                    class="bi bi-pencil-fill"></i></a>
                                         <?php endif; ?>
 
 
-                                        
-                                        <a href="<?php echo e(route('detailsTamu', $bukutamu->id)); ?>"
-                                            class="bg-info px-2 py-2 rounded text-white"><i class="bi bi-eye"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -151,7 +156,6 @@ unset($__errorArgs, $__bag); ?>
 
             </div>
         </div>
-        <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php else: ?>
         <?php echo $__env->make('auth.login', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>

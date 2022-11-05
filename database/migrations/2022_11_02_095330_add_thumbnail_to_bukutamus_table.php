@@ -9,7 +9,7 @@ class AddThumbnailToBukutamusTable extends Migration
     public function up()
     {
         Schema::table('bukutamus', function (Blueprint $table) {
-            $table->string('thumbnail')->after('name')->nullable();
+            $table->longText('thumbnail')->after('name')->nullable();
         });
     }
 

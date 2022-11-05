@@ -54,6 +54,10 @@
                     <a href="{{ route('create') }}" class="btn btn-success fw-bold my-1 mx-1 shadow"> <i
                             class="bi bi-person-plus-fill"></i> PENGUNJUNG</a>
                 @endif
+                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                    <a href="{{ route('register') }}" class="btn btn-success fw-bold my-1 mx-1 shadow"> <i
+                            class="bi bi-person-plus-fill"></i> TAMBAH USER</a>
+                @endif
             </div>
 
             <div class="input-group mb-3 shadow-sm">
@@ -101,28 +105,29 @@
                                 <td>
                                     {{-- delete tamu --}}
                                     <div class="d-flex justify-content-center">
+                                        {{-- lihat detail tentang tamu --}}
+                                        <a href="{{ route('detailsTamu', $bukutamu->id) }}"
+                                            class="bg-info px-2 py-2 rounded text-white "><i class="bi bi-eye"></i></a>
+
+
                                         @if (auth()->user()->role_id === 3)
+                                            {{-- edit tamu --}}
+                                            <a href="{{ route('edit', $bukutamu->id) }}"
+                                                class="bg-primary px-2 py-2 rounded text-white mx-2"><i
+                                                    class="bi bi-pencil-fill"></i></a>
+
+                                            {{-- hapus --}}
                                             <form action="{{ route('delete', $bukutamu->id) }}" method="post"
                                                 class="">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit"
-                                                    class="bg-danger px-2 py-2 rounded text-white border-0"
-                                                    onclick="alert(`yakin anda ingin menghapus data ini ? `)"><i
+                                                    class="bg-danger px-2 py-2 rounded text-white border-0"><i
                                                         class="bi bi-archive-fill"></i></button>
                                             </form>
-
-
-                                            {{-- edit tamu --}}
-                                            <a href="{{ route('edit', $bukutamu->id) }}"
-                                                class="bg-primary px-2 py-2 rounded text-white mx-2"><i
-                                                    class="bi bi-pencil-fill"></i></a>
                                         @endif
 
 
-                                        {{-- lihat detail tentang tamu --}}
-                                        <a href="{{ route('detailsTamu', $bukutamu->id) }}"
-                                            class="bg-info px-2 py-2 rounded text-white"><i class="bi bi-eye"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -137,7 +142,6 @@
             <div class="mb-5">{{ $bukutamus->links() }}
             </div>
         </div>
-        @include('layouts.footer')
     @else
         @include('auth.login')
     @endif

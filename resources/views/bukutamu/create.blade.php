@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="container px-5 py-2" style="background: url('{{ asset('img/leaves.webp') }}')">
+    <div class="container px-5 py-2 mb-5 " style="background: url('{{ asset('img/leaves.webp') }}')">
 
         <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill"></i> TAMBAH DATA PENGUNJUNG</h3>
         <div class="alert alert-success rounded shadow-sm">Harap di isi dengan sebenar-benar nya dikolom yang sudah
@@ -61,22 +61,43 @@
                     </small>
                 @enderror
             </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary mb-3 mr-2">SIMPAN</button>
-                <a href="/" class="btn btn-danger mb-3">BATAL</a>
-            </div>
-            <div class="mb-3">
-                <div class="form-group d-flex flex-column">
-                    <label for="thumbnail">POTO</label>
-                    <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
+            {{-- START WEBCAM --}}
+            <div class="mb-5">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-md-6">
+                        <div class="alert alert-warning  peringatan">Poto anda akan tampil disini!</div>
+                        <div class="d-flex justify-content-start   position-relative">
+                            <div class="card-img-top mr-2 rounded position-absolute" id="results">
+                                {{-- <img src="{{ asset('img/nikita.jpg') }}" class="card-img-top shadow" alt="Preview Photo"> --}}
+                            </div>
+                            <div class="card-img-top mr-2 rounded position-absolute" id="my_camera">
+                                @error('thumbnail')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
+                                    </small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-success opacity-0 berhasil-upload">Poto berhasil di simpan!</div>
+                        <div class="form-group row" style="flex-flow: row-reverse;">
+                            <div class="pr-5 d-flex justify-content-end">
+                                <input type="button" class=" btn btn-primary mx-2" value="BUKA KAMERA"
+                                    onClick="buka_kamera()" />
+                                <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO"
+                                    onClick="ambil_photo()" />
+                                <button type="submit" class="btn btn-success mx-2">SIMPAN</button>
+                                <a href="/" class="btn btn-danger ">BATAL</a>
+                                <input type="hidden" name="thumbnail" id="image_tag">
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                @error('thumbnail')
-                    <small class="text-danger">
-                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
-                    </small>
-                @enderror
+
             </div>
+            {{-- END START --}}
         </form>
     </div>
-    @include('layouts.footer')
 @endsection

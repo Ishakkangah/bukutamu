@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>KOMINFO OKI</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,7 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- MY CSS --}}
-    <link rel="stylesheet" href="{{ asset('taik/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('mycss/main.css') }}">
 </head>
 
 <body>
@@ -35,5 +35,12 @@
 
     </div>
 </body>
+{{-- WEBCAM JS --}}
+<script src="{{ asset('js/webcam.js') }}"></script>
+{{-- MY SCRIPT --}}
+<script src="{{ asset('js/script.js') }}"></script>
+{{-- SWEET ALERT --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </html>

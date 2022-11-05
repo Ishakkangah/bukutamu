@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <title>KOMINFO OKI</title>
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
@@ -23,7 +23,7 @@
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
     
-    <link rel="stylesheet" href="<?php echo e(asset('taik/main.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('mycss/main.css')); ?>">
 </head>
 
 <body>
@@ -35,6 +35,13 @@
 
     </div>
 </body>
+
+<script src="<?php echo e(asset('js/webcam.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/script.js')); ?>"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </html>
 <?php /**PATH D:\buku_tamu\resources\views/layouts/app.blade.php ENDPATH**/ ?>

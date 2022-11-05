@@ -38,21 +38,55 @@ class BukutamuController extends Controller
     // KIRIM KE DATABASE
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|max:200',
-            'thumbnail' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'thumbnail' => 'required',
             'instansi' => 'required|max:200',
             'perihal' => 'required|max:200',
             'tujuan' => 'required|max:200',
             'keterangan' => 'required|present'
         ]);
-        $thumbnail = request()->file('thumbnail') ? request()->file('thumbnail')->store('images/bukutamu') : null; // 2
-        $attr['thumbnail'] = $thumbnail;
+
         $attr["name"] = strtoupper($request->name);
         $attr["instansi"] = strtoupper($request->instansi);
         $attr["perihal"] = strtoupper($request->perihal);
         $attr["tujuan"] = strtoupper($request->tujuan);
         $attr["keterangan"] = strtoupper($request->keterangan);
+        $attr['thumbnail'] = $request->thumbnail;
+
+        if ($request->name) {
+            $attr['name'] = $request->name;
+        }
+        if ($request->instansi) {
+            $attr['instansi'] = $request->instansi;
+        }
+        if ($request->perihal) {
+            $attr['perihal'] = $request->perihal;
+        }
+        if ($request->tujuan) {
+            $attr['tujuan'] = $request->tujuan;
+        }
+        if ($request->keterangan) {
+            $attr['keterangan'] = $request->keterangan;
+        }
+        if ($request->thumbnail) {
+            $img = $request->thumbnail;
+            $img_parts = explode(';base64,', $img);
+            $img_type_aux = explode('image/', $img_parts[0]);
+            $image_type = $img_type_aux[1];
+
+            $img_base64 = base64_decode($img_parts[1]);
+            $fileName = uniqid() . '.png'; //Nilai uniq => contoh : "63667e0f0d877.png"
+
+            $folderPath = 'images/bukutamu/';
+            $file = $folderPath . $fileName;
+            Storage::put($file, $img_base64);
+            // $attr['thumbnail'] = $fileName ? $fileName->store('images/bukutamu') : null;
+
+            $attr['thumbnail'] = $file;
+        }
+
 
         bukutamu::create($attr);
         return redirect('/')->with('success', 'Data berhasil di tambahkan');
@@ -77,19 +111,11 @@ class BukutamuController extends Controller
     {
         $request->validate([
             'name' => 'required|max:200',
-            'thumbnail' => 'image|mimes:jpeg,jpg,png|max:2048',
             'instansi' => 'required|max:200',
             'perihal' => 'required|max:200',
             'tujuan' => 'required|max:200',
             'keterangan' => 'required|present'
         ]);
-
-        if ($request->file('thumbnail')) {
-            Storage::delete($bukutamu->thumbnail);
-            $attr['thumbnail'] = $request->file('thumbnail')->store('images/bukutamu');
-        } else {
-            $attr["thumbnail"] = $bukutamu->thumbnail;
-        }
 
         $attr["name"] = $request->name;
         $attr["instansi"] = $request->instansi;

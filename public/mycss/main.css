@@ -8,3 +8,12 @@ body {
 .navigasi_saya {
     background: ##fefefe;
 }
+
+.alert_webcam {
+    display: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.margin_create_bottom {
+    margin-bottom: 200px !important ;
+}

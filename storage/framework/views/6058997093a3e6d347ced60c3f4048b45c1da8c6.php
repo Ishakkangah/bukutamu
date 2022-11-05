@@ -100,40 +100,12 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
             </div>
-            
-            <div class="mb-3">
-                <?php if($datatamus->thumbnail): ?>
-                    <div class="card" style="width: 10rem;">
-                        <img src="<?php echo e($datatamus->takeImage); ?>" class="card-img-top rounded shadow" width="200px">
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-warning">Anda belum mengupload photo!</div>
-                <?php endif; ?>
-                <div class="form-group d-flex flex-column">
-                    <label for="thumbnail">POTO</label>
-                    <input type="file" class="form-control-file" id="thumbnail" name="thumbnail"
-                        value="<?php echo e(old('thumbnail')); ?>">
-                </div>
-                <?php $__errorArgs = ['thumbnail'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <small class="text-danger">
-                        <div class="bg-danger rounded text-white mt-1 px-2 py-2"><?php echo e($message); ?></div>
-                    </small>
-                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-            </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary mb-3">SIMPAN PERUBAHAN</button>
                 <a href="/" class="btn btn-danger mb-3">BATAL</a>
             </div>
         </form>
     </div>
-    <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\buku_tamu\resources\views/bukutamu/edit.blade.php ENDPATH**/ ?>
