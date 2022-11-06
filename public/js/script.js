@@ -1,13 +1,3 @@
-function hapusTamu() {
-    Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Berhasil disave",
-        showConfirmButton: false,
-        timer: 1500,
-    });
-}
-
 // BUKA KAMERA
 function buka_kamera() {
     Webcam.set({

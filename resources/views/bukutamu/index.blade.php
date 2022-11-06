@@ -3,15 +3,8 @@
 @section('content')
     @if (Auth::user())
         <div class="container my-3 mb-5">
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success') }}
-                </div>
-            @endif
-
-            <h5 class="display-4  text-muted text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
-                KOMERING ILIR
-            </h5>
+            @include('components.alert')
+            @include('components.title')
             @if (auth()->user()->role_id === 3 || auth()->user()->role_id === 2)
                 <div class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end">
                     <form action="{{ route('cetakBukuTamuBerdasarkanPilihan') }}" class="d-flex">
@@ -39,7 +32,7 @@
                         <div class="form-group mx-2 d-flex flex-column justify-content-end">
                             <label></label>
                             <button type="submit" class="btn btn-primary shadow">
-                                <i class="bi bi-printer-fill"></i> Cetak PDF</button>
+                                <i class="bi bi-printer-fill"></i> CETAK PDF</button>
                         </div>
                     </form>
                 </div>
@@ -66,48 +59,28 @@
                         <input type="text" class="form-control" name="cari"
                             placeholder="Pencarian berdasarkan nama..">
                         <div class="input-group-append ">
-                            <button class="btn btn-primary d-flex" type="submit" id="button"><i
+                            <button class="btn btn-primary d-flex font-weight-bold" type="submit" id="button"><i
                                     class="bi bi-search mx-2"></i>
-                                cari</button>
+                                CARI</button>
                         </div>
                     </form>
                 @endif
             </div>
 
             <div class="table-responsive">
-                <table class="table table-bordered table-hover shadow rounded overflow-hidden ">
-                    <thead class="bg-primary text-white">
-                        <tr class="border-red">
-                            <th scope="col" class="text-center">#</th>
-                            <th scope="col" class="text-center">PHOTO</th>
-                            <th scope="col" class="text-center">NAMA</th>
-                            <th scope="col" class="text-center">TANGGAL</th>
-                            <th scope="col" class="text-center">INSTANSI</th>
-                            <th scope="col" class="text-center">PERIHAL</th>
-                            <th scope="col" class="text-center">AKSI</th>
-                        </tr>
-                    </thead>
+                <table class="table  table-hover shadow rounded overflow-hidden">
+                    @include('components.haaderTable')
                     <tbody>
                         @php $i=1 @endphp
                         @forelse ($bukutamus as $bukutamu)
                             <tr>
-                                <th scope="row" class="text-center">{{ $i++ }}</th>
-                                <td class="text-center">
-                                    @if ($bukutamu->takeImage)
-                                        <img src="{{ $bukutamu->takeImage ? $bukutamu->takeImage : asset('img/profile.jpg') }}"
-                                            class="rounded" alt="photo" width="50px">
-                                    @endif
-                                </td>
-                                <td class="text-center">{{ $bukutamu->name }}</td>
-                                <td class="text-center">{{ $bukutamu->created_at->format('d/m/Y') }}</td>
-                                <td class="text-center">{{ $bukutamu->instansi }}</td>
-                                <td class="text-center">{{ $bukutamu->perihal }}</td>
-                                <td>
+                                <th scope="row" class="text-center text-muted align-middle">{{ $i++ }}</th>
+                                <td class="align-middle">
                                     {{-- delete tamu --}}
                                     <div class="d-flex justify-content-center">
                                         {{-- lihat detail tentang tamu --}}
                                         <a href="{{ route('detailsTamu', $bukutamu->id) }}"
-                                            class="bg-info px-2 py-2 rounded text-white "><i class="bi bi-eye"></i></a>
+                                            class="bg-success px-2 py-2 rounded text-white"><i class="bi bi-eye"></i></a>
 
 
                                         @if (auth()->user()->role_id === 3)
@@ -130,6 +103,19 @@
 
                                     </div>
                                 </td>
+                                <td class="text-center">
+                                    @if ($bukutamu->takeImage)
+                                        <img src="{{ $bukutamu->takeImage ? $bukutamu->takeImage : asset('img/profile.jpg') }}"
+                                            class="rounded" alt="photo" width="40px">
+                                    @endif
+                                </td>
+                                <td class="text-center align-middle"><a class="text-decoration-none text-muted"
+                                        href="{{ route('detailsTamu', $bukutamu->id) }}">{{ strtoupper($bukutamu->name) }}</a>
+                                </td>
+                                <td class="text-center text-muted align-middle">
+                                    {{ $bukutamu->created_at->format('d/m/Y') }}</td>
+                                <td class="text-center text-muted align-middle">{{ strtoupper($bukutamu->instansi) }}</td>
+                                <td class="text-center text-muted align-middle">{{ strtoupper($bukutamu->perihal) }}</td>
                             </tr>
                         @empty
                             <div class="alert alert-danger" role="alert">

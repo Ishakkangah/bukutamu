@@ -3,19 +3,15 @@
 
 @section('content')
     <div class="container px-5 py-2" style="background: url('{{ asset('img/leaves.webp') }}')">
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success') }}
-            </div>
-        @endif
+        @include('components.alertForm')
 
-        <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill "></i> UBAH DATA PENGUNJUNG</h3>
+        <h3 class="text-secondary mb-5"><i class="bi bi-pencil-fill"></i> UBAH DATA PENGUNJUNG</h3>
         <form action="{{ route('update', $datatamus->id) }}" method="post" enctype="multipart/form-data">
             @method('patch')
             @csrf
 
             <div class="mb-3">
-                <label for="name" class="form-label">NAMA</label>
+                <label for="name" class="form-label text-muted">NAMA</label>
                 <input type="text" class="form-control" name="name" id="name"
                     value="{{ old('name') ?? $datatamus->name }}" placeholder="Masukan nama">
                 @error('name')
@@ -25,7 +21,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="instansi" class="form-label">INSTANSI</label>
+                <label for="instansi" class="form-label  text-muted">INSTANSI</label>
                 <input type="text" class="form-control" id="instansi" name="instansi" placeholder="Masukan instansi"
                     value="{{ old('instansi') ?? $datatamus->instansi }}">
                 @error('instansi')
@@ -35,7 +31,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="perihal" class="form-label">PERIHAL</label>
+                <label for="perihal" class="form-label  text-muted">PERIHAL</label>
                 <input type="text" class="form-control" id="perihal" name="perihal" placeholder="Masukan perihal"
                     value="{{ old('perihal') ?? $datatamus->perihal }}">
                 @error('perihal')
@@ -45,7 +41,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="tujuan" class="form-label">TUJUAN</label>
+                <label for="tujuan" class="form-label  text-muted">TUJUAN</label>
                 <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Masukan tujuan"
                     value="{{ old('tujuan') ?? $datatamus->tujuan }}">
                 @error('tujuan')
@@ -55,9 +51,8 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="keterangan" class="form-label">KETERANGAN</label>
-                <input type="text" class="form-control" id="keterangan" name="keterangan"
-                    placeholder="Masukan keterangan" value="{{ old('keterangan') ?? $datatamus->keterangan }}">
+                <label for="keterangan" class="form-label  text-muted">KETERANGAN</label>
+                <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan keterangan">{{ old('keterangan') ?? $datatamus->keterangan }}</textarea>
                 @error('keterangan')
                     <small class="text-danger">
                         <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>

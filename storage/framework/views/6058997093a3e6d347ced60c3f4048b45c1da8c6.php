@@ -3,20 +3,15 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="container px-5 py-2" style="background: url('<?php echo e(asset('img/leaves.webp')); ?>')">
-        <?php if(session()->has('success')): ?>
-            <div class="alert alert-success">
-                <?php echo e(session()->get('success')); ?>
+        <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-            </div>
-        <?php endif; ?>
-
-        <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill "></i> UBAH DATA PENGUNJUNG</h3>
+        <h3 class="text-secondary mb-5"><i class="bi bi-pencil-fill"></i> UBAH DATA PENGUNJUNG</h3>
         <form action="<?php echo e(route('update', $datatamus->id)); ?>" method="post" enctype="multipart/form-data">
             <?php echo method_field('patch'); ?>
             <?php echo csrf_field(); ?>
 
             <div class="mb-3">
-                <label for="name" class="form-label">NAMA</label>
+                <label for="name" class="form-label text-muted">NAMA</label>
                 <input type="text" class="form-control" name="name" id="name"
                     value="<?php echo e(old('name') ?? $datatamus->name); ?>" placeholder="Masukan nama">
                 <?php $__errorArgs = ['name'];
@@ -33,7 +28,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="instansi" class="form-label">INSTANSI</label>
+                <label for="instansi" class="form-label  text-muted">INSTANSI</label>
                 <input type="text" class="form-control" id="instansi" name="instansi" placeholder="Masukan instansi"
                     value="<?php echo e(old('instansi') ?? $datatamus->instansi); ?>">
                 <?php $__errorArgs = ['instansi'];
@@ -50,7 +45,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="perihal" class="form-label">PERIHAL</label>
+                <label for="perihal" class="form-label  text-muted">PERIHAL</label>
                 <input type="text" class="form-control" id="perihal" name="perihal" placeholder="Masukan perihal"
                     value="<?php echo e(old('perihal') ?? $datatamus->perihal); ?>">
                 <?php $__errorArgs = ['perihal'];
@@ -67,7 +62,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="tujuan" class="form-label">TUJUAN</label>
+                <label for="tujuan" class="form-label  text-muted">TUJUAN</label>
                 <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Masukan tujuan"
                     value="<?php echo e(old('tujuan') ?? $datatamus->tujuan); ?>">
                 <?php $__errorArgs = ['tujuan'];
@@ -84,9 +79,8 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="keterangan" class="form-label">KETERANGAN</label>
-                <input type="text" class="form-control" id="keterangan" name="keterangan"
-                    placeholder="Masukan keterangan" value="<?php echo e(old('keterangan') ?? $datatamus->keterangan); ?>">
+                <label for="keterangan" class="form-label  text-muted">KETERANGAN</label>
+                <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan keterangan"><?php echo e(old('keterangan') ?? $datatamus->keterangan); ?></textarea>
                 <?php $__errorArgs = ['keterangan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

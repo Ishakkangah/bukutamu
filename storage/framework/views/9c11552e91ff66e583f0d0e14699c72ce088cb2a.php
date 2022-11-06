@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <form method="POST" action="<?php echo e(route('login')); ?>">
                         <?php echo csrf_field(); ?>
-                        <h4 class="mb-2 text-center ">MASUK</h4>
+                        <h4 class="mb-2 text-center text-muted ">MASUK</h4>
                         <div class="col-md-12">
                             <label for="username" class=" col-form-label text-md-end">Nama pengguna</label>
                             <div class="col-md-12">

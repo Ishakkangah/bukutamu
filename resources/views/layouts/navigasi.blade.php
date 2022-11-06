@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light  shadow-sm navigasi_saya">
+<nav class="navbar navbar-expand-md navbar-light  shadow navigasi_saya">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('img/kominfo.png') }}" width="250px" alt="Kominfo-oki">
@@ -21,15 +21,15 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link font-weight-bold" href="{{ route('login') }}">MASUK</a>
+                            <a class="nav-link font-weight-bold text-muted" href="{{ route('login') }}">MASUK</a>
                         </li>
                     @endif
 
-                    @if (Route::has('register'))
+                    {{-- @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link font-weight-bold" href="{{ route('register') }}">DAFTAR</a>
+                            <a class="nav-link font-weight-bold text-muted" href="{{ route('register') }}">DAFTAR</a>
                         </li>
-                    @endif
+                    @endif --}}
                 @else
                     <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

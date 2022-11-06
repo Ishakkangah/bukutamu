@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light  shadow-sm navigasi_saya">
+<nav class="navbar navbar-expand-md navbar-light  shadow navigasi_saya">
     <div class="container">
         <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
             <img src="<?php echo e(asset('img/kominfo.png')); ?>" width="250px" alt="Kominfo-oki">
@@ -21,15 +21,11 @@
                 <?php if(auth()->guard()->guest()): ?>
                     <?php if(Route::has('login')): ?>
                         <li class="nav-item">
-                            <a class="nav-link font-weight-bold" href="<?php echo e(route('login')); ?>">MASUK</a>
+                            <a class="nav-link font-weight-bold text-muted" href="<?php echo e(route('login')); ?>">MASUK</a>
                         </li>
                     <?php endif; ?>
 
-                    <?php if(Route::has('register')): ?>
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold" href="<?php echo e(route('register')); ?>">DAFTAR</a>
-                        </li>
-                    <?php endif; ?>
+                    
                 <?php else: ?>
                     <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

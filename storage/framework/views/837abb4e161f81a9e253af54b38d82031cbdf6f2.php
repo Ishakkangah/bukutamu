@@ -1,16 +1,8 @@
 <?php $__env->startSection('content'); ?>
     <?php if(Auth::user()): ?>
         <div class="container my-3 mb-5">
-            <?php if(session()->has('success')): ?>
-                <div class="alert alert-success">
-                    <?php echo e(session()->get('success')); ?>
-
-                </div>
-            <?php endif; ?>
-
-            <h5 class="display-4  text-muted text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
-                KOMERING ILIR
-            </h5>
+            <?php echo $__env->make('components.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('components.title', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php if(auth()->user()->role_id === 3 || auth()->user()->role_id === 2): ?>
                 <div class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end">
                     <form action="<?php echo e(route('cetakBukuTamuBerdasarkanPilihan')); ?>" class="d-flex">
@@ -52,7 +44,7 @@ unset($__errorArgs, $__bag); ?>
                         <div class="form-group mx-2 d-flex flex-column justify-content-end">
                             <label></label>
                             <button type="submit" class="btn btn-primary shadow">
-                                <i class="bi bi-printer-fill"></i> Cetak PDF</button>
+                                <i class="bi bi-printer-fill"></i> CETAK PDF</button>
                         </div>
                     </form>
                 </div>
@@ -79,48 +71,28 @@ unset($__errorArgs, $__bag); ?>
                         <input type="text" class="form-control" name="cari"
                             placeholder="Pencarian berdasarkan nama..">
                         <div class="input-group-append ">
-                            <button class="btn btn-primary d-flex" type="submit" id="button"><i
+                            <button class="btn btn-primary d-flex font-weight-bold" type="submit" id="button"><i
                                     class="bi bi-search mx-2"></i>
-                                cari</button>
+                                CARI</button>
                         </div>
                     </form>
                 <?php endif; ?>
             </div>
 
             <div class="table-responsive">
-                <table class="table table-bordered table-hover shadow rounded overflow-hidden ">
-                    <thead class="bg-primary text-white">
-                        <tr class="border-red">
-                            <th scope="col" class="text-center">#</th>
-                            <th scope="col" class="text-center">PHOTO</th>
-                            <th scope="col" class="text-center">NAMA</th>
-                            <th scope="col" class="text-center">TANGGAL</th>
-                            <th scope="col" class="text-center">INSTANSI</th>
-                            <th scope="col" class="text-center">PERIHAL</th>
-                            <th scope="col" class="text-center">AKSI</th>
-                        </tr>
-                    </thead>
+                <table class="table  table-hover shadow rounded overflow-hidden">
+                    <?php echo $__env->make('components.haaderTable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <tbody>
                         <?php $i=1 ?>
                         <?php $__empty_1 = true; $__currentLoopData = $bukutamus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bukutamu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr>
-                                <th scope="row" class="text-center"><?php echo e($i++); ?></th>
-                                <td class="text-center">
-                                    <?php if($bukutamu->takeImage): ?>
-                                        <img src="<?php echo e($bukutamu->takeImage ? $bukutamu->takeImage : asset('img/profile.jpg')); ?>"
-                                            class="rounded" alt="photo" width="50px">
-                                    <?php endif; ?>
-                                </td>
-                                <td class="text-center"><?php echo e($bukutamu->name); ?></td>
-                                <td class="text-center"><?php echo e($bukutamu->created_at->format('d/m/Y')); ?></td>
-                                <td class="text-center"><?php echo e($bukutamu->instansi); ?></td>
-                                <td class="text-center"><?php echo e($bukutamu->perihal); ?></td>
-                                <td>
+                                <th scope="row" class="text-center text-muted align-middle"><?php echo e($i++); ?></th>
+                                <td class="align-middle">
                                     
                                     <div class="d-flex justify-content-center">
                                         
                                         <a href="<?php echo e(route('detailsTamu', $bukutamu->id)); ?>"
-                                            class="bg-info px-2 py-2 rounded text-white "><i class="bi bi-eye"></i></a>
+                                            class="bg-success px-2 py-2 rounded text-white"><i class="bi bi-eye"></i></a>
 
 
                                         <?php if(auth()->user()->role_id === 3): ?>
@@ -143,6 +115,19 @@ unset($__errorArgs, $__bag); ?>
 
                                     </div>
                                 </td>
+                                <td class="text-center">
+                                    <?php if($bukutamu->takeImage): ?>
+                                        <img src="<?php echo e($bukutamu->takeImage ? $bukutamu->takeImage : asset('img/profile.jpg')); ?>"
+                                            class="rounded" alt="photo" width="40px">
+                                    <?php endif; ?>
+                                </td>
+                                <td class="text-center align-middle"><a class="text-decoration-none text-muted"
+                                        href="<?php echo e(route('detailsTamu', $bukutamu->id)); ?>"><?php echo e(strtoupper($bukutamu->name)); ?></a>
+                                </td>
+                                <td class="text-center text-muted align-middle">
+                                    <?php echo e($bukutamu->created_at->format('d/m/Y')); ?></td>
+                                <td class="text-center text-muted align-middle"><?php echo e(strtoupper($bukutamu->instansi)); ?></td>
+                                <td class="text-center text-muted align-middle"><?php echo e(strtoupper($bukutamu->perihal)); ?></td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <div class="alert alert-danger" role="alert">

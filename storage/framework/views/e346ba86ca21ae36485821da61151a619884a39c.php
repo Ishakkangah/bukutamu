@@ -5,14 +5,13 @@
     <div class="container px-5 py-2 mb-5 " style="background: url('<?php echo e(asset('img/leaves.webp')); ?>')">
 
         <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill"></i> TAMBAH DATA PENGUNJUNG</h3>
-        <div class="alert alert-success rounded shadow-sm">Harap di isi dengan sebenar-benar nya dikolom yang sudah
-            disediakan</div>
+        <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <form action="<?php echo e(route('store')); ?>" method="post" enctype="multipart/form-data">
             <?php echo method_field('patch'); ?>
             <?php echo csrf_field(); ?>
 
             <div class="mb-3">
-                <label for="name" class="form-label">NAMA</label>
+                <label for="name" class="form-label text-muted">NAMA</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Masukan nama"
                     value="<?php echo e(old('name')); ?>">
                 <?php $__errorArgs = ['name'];
@@ -29,7 +28,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="instansi" class="form-label">INSTANSI</label>
+                <label for="instansi" class="form-label text-muted">INSTANSI</label>
                 <input type="text" class="form-control" name="instansi" id="instansi" placeholder="Masukan instansi"
                     value="<?php echo e(old('instansi')); ?>">
                 <?php $__errorArgs = ['instansi'];
@@ -46,7 +45,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="perihal" class="form-label">PERIHAL</label>
+                <label for="perihal" class="form-label text-muted">PERIHAL</label>
                 <input type="text" class="form-control" id="perihal" name="perihal" placeholder="Masukan perihal"
                     value="<?php echo e(old('perihal')); ?>">
                 <?php $__errorArgs = ['perihal'];
@@ -63,7 +62,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="tujuan" class="form-label">TUJUAN</label>
+                <label for="tujuan" class="form-label text-muted">TUJUAN</label>
                 <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Masukan tujuan"
                     value="<?php echo e(old('tujuan')); ?>">
                 <?php $__errorArgs = ['tujuan'];
@@ -80,9 +79,9 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="mb-3">
-                <label for="keterangan" class="form-label">KETERANGAN</label>
-                <input type="text" class="form-control" id="keterangan" name="keterangan"
-                    placeholder="Masukan keterangan" value="<?php echo e(old('keterangan')); ?>">
+                <label for="keterangan" class="form-label text-muted">KETERANGAN</label>
+                <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan keterangan"
+                    value="<?php echo e(old('keterangan')); ?>"></textarea>
                 <?php $__errorArgs = ['keterangan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

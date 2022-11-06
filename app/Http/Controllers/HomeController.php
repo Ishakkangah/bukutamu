@@ -14,8 +14,7 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        $bukutamus = bukutamu::latest()->paginate(5);
+        $bukutamus = bukutamu::latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
         return view('bukutamu.index', compact('bukutamus'));
     }
 }
