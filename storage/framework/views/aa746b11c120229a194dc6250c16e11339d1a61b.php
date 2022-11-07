@@ -21,7 +21,7 @@
             Agung, Kabupaten Ogan
             Komering Ilir, Sumatera Selatan</div>
         <table class="table">
-            <thead class="">
+            <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">NAMA</th>

@@ -13,4 +13,7 @@
 <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
 
 <link rel="stylesheet" href="<?php echo e(asset('mycss/main.css')); ?>">
+
+
+<?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php /**PATH D:\buku_tamu\resources\views/links/link_header.blade.php ENDPATH**/ ?>

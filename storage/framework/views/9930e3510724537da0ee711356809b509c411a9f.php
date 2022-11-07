@@ -31,6 +31,9 @@
                 <?php echo $__env->make('components.bodyTable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </table>
         </div>
+        <div class="mb-5"><?php echo e($data->links()); ?>
+
+        </div>
     </div>
 <?php $__env->stopSection(); ?>
 

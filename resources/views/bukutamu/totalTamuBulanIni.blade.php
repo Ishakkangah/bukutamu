@@ -29,5 +29,7 @@
                 @include('components.bodyTable')
             </table>
         </div>
+        <div class="mb-5">{{ $data->links() }}
+        </div>
     </div>
 @endsection

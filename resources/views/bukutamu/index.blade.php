@@ -47,10 +47,6 @@
                     <a href="{{ route('create') }}" class="btn btn-success fw-bold my-1 mx-1 shadow"> <i
                             class="bi bi-person-plus-fill"></i> PENGUNJUNG</a>
                 @endif
-                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-                    <a href="{{ route('register') }}" class="btn btn-success fw-bold my-1 mx-1 shadow"> <i
-                            class="bi bi-person-plus-fill"></i> TAMBAH USER</a>
-                @endif
             </div>
 
             <div class="input-group mb-3 shadow-sm">
@@ -76,7 +72,6 @@
                             <tr>
                                 <th scope="row" class="text-center text-muted align-middle">{{ $i++ }}</th>
                                 <td class="align-middle">
-                                    {{-- delete tamu --}}
                                     <div class="d-flex justify-content-center">
                                         {{-- lihat detail tentang tamu --}}
                                         <a href="{{ route('detailsTamu', $bukutamu->id) }}"
@@ -95,8 +90,11 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit"
-                                                    class="bg-danger px-2 py-2 rounded text-white border-0"><i
-                                                        class="bi bi-archive-fill"></i></button>
+                                                    class="bg-danger px-2 py-2 rounded text-white border-0"
+                                                    onclick="return confirm('Yakin ?')">
+
+
+                                                    <i class="bi bi-archive-fill"></i></button>
                                             </form>
                                         @endif
 

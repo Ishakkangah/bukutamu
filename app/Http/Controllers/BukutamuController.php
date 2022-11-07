@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
-use PhpParser\Node\Stmt\TryCatch;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BukutamuController extends Controller
 {
@@ -93,7 +93,9 @@ class BukutamuController extends Controller
 
 
         bukutamu::create($attr);
-        return redirect('/')->with('success', 'Data berhasil di tambahkan');
+        Alert::success('OK. ', 'Data berhasil disimpan!');
+
+        return redirect('/')->with('success', 'Data berhasil di simpan');
     }
 
     // DETAIL DATA TAMU
@@ -129,6 +131,8 @@ class BukutamuController extends Controller
         $attr["keterangan"] = $request->keterangan;
 
         $bukutamu->update($attr);
+        Alert::success('OK. ', 'Data berhasil di ubah.');
+
         return redirect('/')->with('success', 'Tamu berhasil di ubah!');
     }
 
@@ -138,6 +142,7 @@ class BukutamuController extends Controller
         Storage::delete($bukutamu->thumbnail);
         $bukutamu->delete();
         session()->flash('success', 'Data tamu atas nama ' . $bukutamu->name . ' berhasil dihapus !');
+        Alert::success('Sukses',  'Berhasil dihapus');
         return redirect()->to('/');
     }
 
@@ -145,7 +150,7 @@ class BukutamuController extends Controller
     // TOTAL TAMU HARI INI
     function totalTamuHariIni(Request $request)
     {
-        $data = bukutamu::select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->whereDate('created_at', Carbon::now())->latest()->paginate(20);
+        $data = bukutamu::select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->whereDate('created_at', Carbon::now())->latest()->paginate(120);
         return view('bukutamu.totalTamuHariIni', compact('data'));
     }
 
@@ -162,7 +167,7 @@ class BukutamuController extends Controller
     // TOTAL TAMU MINGGU INI
     function totalTamuBulanIni(Request $request)
     {
-        $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->latest()->select('id', 'name', 'thumbnail', 'instansi', 'perihal', 'created_at')->paginate(20);
+        $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->latest()->select('id', 'name', 'thumbnail', 'instansi', 'perihal', 'created_at')->paginate(120);
         $hariPertama = Carbon::now()->startOfWeek();
         $hariTerakhir = Carbon::now()->endOfWeek();
         return view('bukutamu.totalTamuBulanIni', compact('data', 'hariPertama', 'hariTerakhir'));

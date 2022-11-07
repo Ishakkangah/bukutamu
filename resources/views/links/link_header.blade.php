@@ -13,3 +13,6 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 {{-- MY CSS --}}
 <link rel="stylesheet" href="{{ asset('mycss/main.css') }}">
+
+{{-- SWEET ALERT --}}
+@include('sweetalert::alert')
