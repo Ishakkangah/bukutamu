@@ -6,21 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- BOOTSTRAP --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <body>
-    <div>
-        <h5 class=" text-muted text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
-            KOMERING ILIR
-        </h5>
-        <div class="text-small text-center mb-1"> Alamat Kantor, Jl. Letjen, Jl. H. M. Yusuf Singedekane No.01, Jua Jua,
-            Kec. Kayu
-            Agung, Kabupaten Ogan
-            Komering Ilir, Sumatera Selatan</div>
-        <table class="table">
+    <div class="container-fluid mx-auto my-5">
+        <div class="d-flex d-flex justify-content-around align-items-center align-middle mt-5 ">
+            {{-- <img alt="iamgurdeeposahan" src="{{ asset('img/logo_pemda.svg') }}" style="width: 100px;"> --}}
+            <div class="text-center col-md-8">
+                <h2 class="card-title">REKAP DAFTAR PENGUNJUNG DISKOMINFO KAB. OKI</h2>
+                <h3>Daftar pengunjung Tanggal {{ now()->format('d-M-Y') }}
+                </h3>
+                <p>Jl. H. M. Yusuf Singedekane No.01, Muara Baru, Kec. Kayu Agung,
+                    Kabupaten Ogan Komering Ilir, Sumatera Selatan 30651</p>
+            </div>
+            {{-- <img alt="kominfo" src="{{ asset('img/logo_kominfo.svg') }}" style="width: 200px;"> --}}
+        </div>
+        <table class="table table-bordered  mt-5">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -47,7 +52,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
     </div>
 </body>
 

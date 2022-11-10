@@ -4,7 +4,7 @@
 @section('content')
     <div class="container px-5 py-2 mb-5 " style="background: url('{{ asset('img/leaves.webp') }}')">
 
-        <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill"></i> TAMBAH DATA PENGUNJUNG</h3>
+        <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
         @include('components.alertForm')
         <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
             @method('patch')

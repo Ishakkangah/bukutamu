@@ -4,25 +4,40 @@
     <div class="container my-2">
         <H2 class="card-title mb-3 font-weigh-bold text-secondary">INFO PENGUNJUNG</H2>
         <div class="card mb-3 overflow-hidden shadow">
-            <div class="row no-gutters ">
+            <div class="row no-gutters d-flex align-items-center">
                 <div class="col-md-4">
                     <img src="{{ $dataTamu->takeImage ? $dataTamu->takeImage : asset('img/profile.jpg') }}"
                         class="rounded w-100" style="    height: 400px; object-fit: cover; object-position: center;">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item font-weight-bold text-muted">Nama :{{ strtoupper($dataTamu->name) }}
-                            </li>
-                            <li class="list-group-item text-muted">Instansi : {{ strtoupper($dataTamu->instansi) }}</li>
-                            <li class="list-group-item text-muted">Perihal : {{ strtoupper($dataTamu->perihal) }}</li>
-                            <li class="list-group-item text-muted">Kunjungan :
-                                {{ strtoupper($dataTamu->created_at->diffForHumans()) }}
-                            </li>
-                            <li class="list-group-item text-muted">Tujuan : {{ strtoupper($dataTamu->tujuan) }}</li>
-                            <li class="list-group-item text-muted">Keterangan : {{ strtoupper($dataTamu->keterangan) }}</li>
-                        </ul>
-                        <div class="card-body">
+                        <table class="table table-borderless text-muted">
+                            <tbody>
+                                <tr class="align-middle">
+                                    <td>NAMA</td>
+                                    <td>
+                                        <H5>{{ strtoUpper($dataTamu->name) }}</H5>
+                                    </td>
+                                </tr>
+                                <tr class="align-middle">
+                                    <td>INSTANSI</td>
+                                    <td>{{ strtoupper($dataTamu->instansi) }}</td>
+                                </tr>
+                                <tr class="align-middle">
+                                    <td>PERIHAL</td>
+                                    <td>{{ strtoupper($dataTamu->perihal) }}</td>
+                                </tr>
+                                <tr class="align-middle">
+                                    <td>KETERANGAN</td>
+                                    <td>{{ strtoupper($dataTamu->keterangan) }}</td>
+                                </tr>
+                                <tr class="align-middle">
+                                    <td>TANGGAL KEDATANGAN</td>
+                                    <td>{{ strtoupper($dataTamu->created_at) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="card-body mx-0 px-0">
                             <a href="/" class="card-link btn btn-primary">
                                 Kembali</a>
                         </div>

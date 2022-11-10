@@ -22,4 +22,15 @@ class LoginController extends Controller
     {
         return 'username';
     }
+
+
+    // JIKA YANG LOGIN ADALAH TAMU MAKA TENDANG KE ROUTE /CREATE.
+    public function authenticated()
+    {
+        if (auth()->user()->role_id === 4) {
+            return redirect()->route('create');
+        }
+
+        return redirect('/');
+    }
 }

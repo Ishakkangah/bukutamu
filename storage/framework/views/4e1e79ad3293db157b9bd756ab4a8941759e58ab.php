@@ -22,11 +22,11 @@
             <?php if(auth()->user()->role_id === 2 || auth()->user()->role_id == 3): ?>
                 
                 <a href="<?php echo e(route('cetakBukuTamuHariIni')); ?>" class="btn btn-primary shadow">
-                    <i class="bi bi-printer-fill"></i> Cetak Tamu Hari ini PDF</a>
+                    <i class="bi bi-printer-fill"></i> Cetak PDF</a>
             <?php endif; ?>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover shadow rounded overflow-hidden">
+            <table class="table  table-hover shadow rounded overflow-hidden">
                 <?php echo $__env->make('components.haaderTable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <?php echo $__env->make('components.bodyTable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </table>

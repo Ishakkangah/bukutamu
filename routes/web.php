@@ -1,14 +1,19 @@
 <?php
 
 use App\Http\Controllers\BukutamuController;
+use App\Models\bukutamu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/testing', function () {
+    $data = bukutamu::get();
+    return view('bukutamu.cetakBukuTamuBerdasarkanPilihan', compact('data'));
+});
 
 Route::get('cari', [BukutamuController::class, 'cari'])->name('cari');
 Route::prefix('bukutamu')->middleware('auth')->group(function () {
-    Route::get('/', [BukutamuController::class, 'index']);
     Route::get('/create', [BukutamuController::class, 'create'])->name('create');
+    Route::get('/', [BukutamuController::class, 'index']);
     Route::patch('/store', [BukutamuController::class, 'store'])->name('store');
     Route::get('/{bukutamu:id}/edit', [BukutamuController::class, 'edit'])->name('edit');
     Route::patch('/{bukutamu:id}/edit', [BukutamuController::class, 'update'])->name('update');

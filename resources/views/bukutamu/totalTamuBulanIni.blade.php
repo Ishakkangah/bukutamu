@@ -20,7 +20,7 @@
                 Kembali</a>
             @if (auth()->user()->role_id === 2 || auth()->user()->role_id == 3)
                 <a href="{{ route('cetakBukuTamuMingguIni') }}" class="btn btn-primary shadow">
-                    <i class="bi bi-printer-fill"></i> Cetak Pengunjung Minggu ini PDF</a>
+                    <i class="bi bi-printer-fill"></i> Cetak PDF</a>
             @endif
         </div>
         <div class="table-responsive">

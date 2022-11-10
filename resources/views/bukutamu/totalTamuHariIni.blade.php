@@ -20,11 +20,11 @@
             @if (auth()->user()->role_id === 2 || auth()->user()->role_id == 3)
                 {{-- CETAK TAMYU HARI INI PDF --}}
                 <a href="{{ route('cetakBukuTamuHariIni') }}" class="btn btn-primary shadow">
-                    <i class="bi bi-printer-fill"></i> Cetak Tamu Hari ini PDF</a>
+                    <i class="bi bi-printer-fill"></i> Cetak PDF</a>
             @endif
         </div>
         <div class="table-responsive">
-            <table class="table table-hover shadow rounded overflow-hidden">
+            <table class="table  table-hover shadow rounded overflow-hidden">
                 @include('components.haaderTable')
                 @include('components.bodyTable')
             </table>

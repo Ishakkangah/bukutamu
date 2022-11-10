@@ -1,12 +1,14 @@
 // BUKA KAMERA
 function buka_kamera() {
     Webcam.set({
-        width: 439,
+        width: 439, //439
         height: 330,
         image_format: "jpeg",
         jpeg_quality: 100,
         crop_width: 240,
         crop_height: 240,
+        // force_flash: false,
+        // flip_horiz: true,
     });
     document.querySelector(".peringatan").classList.add("alert_webcam");
     Webcam.attach("#my_camera");

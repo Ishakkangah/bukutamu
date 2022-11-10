@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\bukutamu;
 use App\Http\Requests\UpdatebukutamuRequest;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -93,9 +95,9 @@ class BukutamuController extends Controller
 
 
         bukutamu::create($attr);
-        Alert::success('OK. ', 'Data berhasil disimpan!');
+        Alert::success('Data berhasil disimpan!', 'Silahkan Masuk!');
 
-        return redirect('/')->with('success', 'Data berhasil di simpan');
+        return redirect()->back()->with('success', 'Data berhasil di simpan');
     }
 
     // DETAIL DATA TAMU
@@ -131,7 +133,7 @@ class BukutamuController extends Controller
         $attr["keterangan"] = $request->keterangan;
 
         $bukutamu->update($attr);
-        Alert::success('OK. ', 'Data berhasil di ubah.');
+        Alert::success('Data berhasil di ubah.');
 
         return redirect('/')->with('success', 'Tamu berhasil di ubah!');
     }
@@ -158,8 +160,8 @@ class BukutamuController extends Controller
     function cetakDaftarTamuHariIni_PDF()
     {
         $data = bukutamu::select('id',  'name', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->whereDate('created_at', Carbon::now())->latest()->get();
-        $pdf =  PDF::loadview('bukutamu.cetakTamuHariIni', ['data' => $data]);
-        return $pdf->download('laporan-buku-tamu-pdf');
+        $pdf =  PDF::loadview('bukutamu.cetakTamuHariIni', ['data' => $data])->setPaper('a4', 'landscape');
+        return $pdf->download('laporan-buku-tamu.pdf');
     }
 
 
@@ -167,7 +169,7 @@ class BukutamuController extends Controller
     // TOTAL TAMU MINGGU INI
     function totalTamuBulanIni(Request $request)
     {
-        $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->latest()->select('id', 'name', 'thumbnail', 'instansi', 'perihal', 'created_at')->paginate(120);
+        $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->latest()->select('id', 'name', 'thumbnail', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->paginate(120);
         $hariPertama = Carbon::now()->startOfWeek();
         $hariTerakhir = Carbon::now()->endOfWeek();
         return view('bukutamu.totalTamuBulanIni', compact('data', 'hariPertama', 'hariTerakhir'));
@@ -184,10 +186,15 @@ class BukutamuController extends Controller
                 Carbon::now()->endOfWeek()
             ]
         )
-            ->latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->get();
-        $pdf =  PDF::loadview('bukutamu.cetakBukuTamuMingguIni', ['data' => $data]);
-
-        return $pdf->download('laporan-buku-tamu pdf');
+            ->latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->get();
+        $hariPertama = Carbon::now()->startOfWeek();
+        $hariTerakhir = Carbon::now()->endOfWeek();
+        $pdf =  PDF::loadview('bukutamu.cetakBukuTamuMingguIni', [
+            'data' => $data,
+            'hariPertama' => $hariPertama,
+            'hariTerakhir' => $hariTerakhir
+        ])->setPaper('a4', 'landscape');
+        return $pdf->download('laporan-buku-tamu.pdf');
     }
 
 
@@ -199,11 +206,14 @@ class BukutamuController extends Controller
             'sampai_tanggal' => 'required|date'
         ]);
 
-        $data = bukutamu::whereBetween('created_at', [$request->tanggal_mulai, $request->sampai_tanggal])->latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
+        $data = bukutamu::whereBetween('created_at',  [$request->tanggal_mulai, $request->sampai_tanggal])->latest()->select('id', 'name', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->paginate(10);
         $tanggal_mulai = $request->tanggal_mulai;
         $sampai_tanggal = $request->sampai_tanggal;
-        $pdf = PDF::loadview('bukutamu.cetakBukuTamuBerdasarkanPilihan', compact('data'));
-
-        return $pdf->download('tamuBerdasarkanPilihan');
+        $pdf = PDF::loadview('bukutamu.cetakBukuTamuBerdasarkanPilihan', [
+            'data' => $data,
+            'tanggal_mulai' => $tanggal_mulai,
+            'sampai_tanggal' => $sampai_tanggal,
+        ])->setPaper('a4', 'landscape');
+        return $pdf->download('laporan-buku-tamu.pdf');
     }
 }
