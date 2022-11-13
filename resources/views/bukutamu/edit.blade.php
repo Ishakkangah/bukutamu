@@ -2,7 +2,8 @@
 
 
 @section('content')
-    <div class="container px-5 py-2" style="background: url('{{ asset('img/leaves.webp') }}')">
+    @include('layouts.navigasi')
+    <div class="container px-5 py-2 mt-5" style="background: url('{{ asset('img/leaves.webp') }}')">
         @include('components.alertForm')
 
         <h3 class="text-secondary mb-5"><i class="bi bi-pencil-fill"></i> UBAH DATA PENGUNJUNG</h3>

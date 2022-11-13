@@ -22,10 +22,5 @@ class RoleSeeder extends Seeder
             'slug' => 'admin',
             'level' => 'admin'
         ]);
-
-        role::create([
-            'slug' => 'tamu',
-            'level' => 'tamu'
-        ]);
     }
 }

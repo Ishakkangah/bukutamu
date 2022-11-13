@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @include('layouts.navigasi')
     <div class="container my-3 mb-5">
         @include('components.title')
         <div class="d-flex justify-content-between  align-items-center ">

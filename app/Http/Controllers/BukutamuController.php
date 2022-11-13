@@ -17,13 +17,18 @@ class BukutamuController extends Controller
     // INDEX
     public function index()
     {
+        $alert =  'Harap di isi dengan sebenar-benar nya dikolom yang sudah disediakan.';
         $bukutamus = bukutamu::latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
-        return view('bukutamu.index', compact('bukutamus'));
+        return view('bukutamu.index', [
+            'bukutamus' => $bukutamus,
+            'alert' => $alert
+        ]);
     }
 
     // CARI TAMU
     public function cari(Request $request)
     {
+        $alert =  'Harap di isi dengan sebenar-benar nya dikolom yang sudah disediakan.';
         $cariTamu =  $request->cari;
         $bukutamus = bukutamu::latest()
             ->where('name', 'like', "%" . $cariTamu . "%")
@@ -31,7 +36,7 @@ class BukutamuController extends Controller
             ->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')
             ->paginate(20);
 
-        return view('bukutamu.index', compact('bukutamus'));
+        return view('bukutamu.index', compact('bukutamus', 'alert'));
     }
 
     // CREATE TAMU
@@ -97,7 +102,7 @@ class BukutamuController extends Controller
         bukutamu::create($attr);
         Alert::success('Data berhasil disimpan!', 'Silahkan Masuk!');
 
-        return redirect()->back()->with('success', 'Data berhasil di simpan');
+        return redirect('/create')->with('success', 'Data berhasil di simpan');
     }
 
     // DETAIL DATA TAMU

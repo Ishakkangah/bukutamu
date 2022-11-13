@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-flex flex-column">
-
+    @include('layouts.navigasi')
+    <div class="container d-flex flex-column mt-5">
         <h5 class="display-5  text-muted text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
             KOMERING ILIR
         </h5>
@@ -15,12 +15,8 @@
                         <div class="col-md-12">
                             <label for="username" class=" col-form-label text-md-end">Nama pengguna</label>
                             <div class="col-md-12">
-                                <select id="username" class="form-control " name="username" value="{{ old('username') }}">
-                                    <option disabled selected>Pilih salah satu!</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->username }}">{{ $user->username }}</option>
-                                    @endforeach
-                                </select>
+                                <input id="username" type="text" class="form-control" name="username" required
+                                    placeholder="Masukan username">
                                 @error('username')
                                     <small class="text-danger">
                                         <div class="bg-danger rounded text-white mt-1 px-2 py-2" role="alert">

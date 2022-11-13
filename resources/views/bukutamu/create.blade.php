@@ -2,7 +2,10 @@
 
 
 @section('content')
-    <div class="container px-5 py-2 mb-5 " style="background: url('{{ asset('img/leaves.webp') }}')">
+    @if (Auth::user())
+        @include('layouts.navigasi')
+    @endif
+    <div class="container px-5 py-2 mb-5 mt-5" style="background: url('{{ asset('img/leaves.webp') }}')">
 
         <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
         @include('components.alertForm')

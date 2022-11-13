@@ -12,8 +12,8 @@
 
 <body>
     <div id="app">
-        @include('layouts.navigasi')
-        <main class="py-5">
+        {{-- @include('layouts.navigasi') --}}
+        <main>
             @yield('content')
         </main>
 

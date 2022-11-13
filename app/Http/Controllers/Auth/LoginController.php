@@ -27,7 +27,7 @@ class LoginController extends Controller
     // JIKA YANG LOGIN ADALAH TAMU MAKA TENDANG KE ROUTE /CREATE.
     public function authenticated()
     {
-        if (auth()->user()->role_id === 4) {
+        if (auth()->user()->role_id === 0) {
             return redirect()->route('create');
         }
 

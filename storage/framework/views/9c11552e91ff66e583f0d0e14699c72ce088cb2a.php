@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
-    <div class="container d-flex flex-column">
-
+    <?php echo $__env->make('layouts.navigasi', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <div class="container d-flex flex-column mt-5">
         <h5 class="display-5  text-muted text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
             KOMERING ILIR
         </h5>
@@ -13,12 +13,8 @@
                         <div class="col-md-12">
                             <label for="username" class=" col-form-label text-md-end">Nama pengguna</label>
                             <div class="col-md-12">
-                                <select id="username" class="form-control " name="username" value="<?php echo e(old('username')); ?>">
-                                    <option disabled selected>Pilih salah satu!</option>
-                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($user->username); ?>"><?php echo e($user->username); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
+                                <input id="username" type="text" class="form-control" name="username" required
+                                    placeholder="Masukan username">
                                 <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

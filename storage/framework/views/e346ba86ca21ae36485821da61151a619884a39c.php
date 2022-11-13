@@ -2,7 +2,10 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <div class="container px-5 py-2 mb-5 " style="background: url('<?php echo e(asset('img/leaves.webp')); ?>')">
+    <?php if(Auth::user()): ?>
+        <?php echo $__env->make('layouts.navigasi', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php endif; ?>
+    <div class="container px-5 py-2 mb-5 mt-5" style="background: url('<?php echo e(asset('img/leaves.webp')); ?>')">
 
         <h3 class="text-secondary mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
         <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

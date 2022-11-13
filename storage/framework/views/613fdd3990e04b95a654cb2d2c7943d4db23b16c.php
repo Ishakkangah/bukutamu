@@ -12,8 +12,8 @@
 
 <body>
     <div id="app">
-        <?php echo $__env->make('layouts.navigasi', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        <main class="py-5">
+        
+        <main>
             <?php echo $__env->yieldContent('content'); ?>
         </main>
 

@@ -2,7 +2,8 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <div class="container px-5 py-2" style="background: url('<?php echo e(asset('img/leaves.webp')); ?>')">
+    <?php echo $__env->make('layouts.navigasi', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <div class="container px-5 py-2 mt-5" style="background: url('<?php echo e(asset('img/leaves.webp')); ?>')">
         <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <h3 class="text-secondary mb-5"><i class="bi bi-pencil-fill"></i> UBAH DATA PENGUNJUNG</h3>

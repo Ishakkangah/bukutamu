@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container my-2">
+    @include('layouts.navigasi')
+    <div class="container my-2 mt-5">
         <H2 class="card-title mb-3 font-weigh-bold text-secondary">INFO PENGUNJUNG</H2>
         <div class="card mb-3 overflow-hidden shadow">
             <div class="row no-gutters d-flex align-items-center">
