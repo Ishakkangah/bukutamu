@@ -1,0 +1,89 @@
+.card_ku {
+    background: linear-gradient(to right, #0e567c, #80a5b8);
+    height: 110vh;
+    display: flex;
+    overflow: hidden;
+}
+
+.colum_kanan {
+    /* margin: 100px 0; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.colum_kanan h2 {
+    font-size: 3.3em;
+    font-weight: 700;
+    color: #ffff;
+}
+.colum_kanan h3 {
+    font-size: 2.3em;
+    font-weight: 500;
+    color: #ffff;
+}
+.colum_kanan .buku {
+    width: 200px;
+    color: #ffff;
+    filter: saturate(200%);
+}
+
+.colum_kiri {
+    /* background-color: green; */
+}
+
+.wrapper {
+    background: #fff;
+    margin-top: 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(243, 238, 241, 0.4) -15px 15px;
+}
+
+.modal-backdrop {
+    /* bug fix - no overlay */
+    display: none;
+}
+
+.modal {
+    /* bug fix - custom overlay */
+    background-color: rgba(10, 10, 10, 0.45);
+}
+
+.textarea1 {
+    resize: none;
+}
+
+textarea {
+    width: 300px;
+    height: 150px;
+}
+
+.hilangkanKamera {
+    transition: all 0.5s;
+    transform: scale(0);
+}
+
+.tampilKamera {
+    display: block;
+}
+
+.circle {
+    width: 250px;
+    height: 250px;
+    background: #fff;
+    border-radius: 50%;
+    top: -20%;
+    left: 130px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.circle img {
+    position: absolute;
+    top: 60%;
+    width: 140px;
+}

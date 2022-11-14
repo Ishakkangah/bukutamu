@@ -50,6 +50,7 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="form-group text-right">
                             
+                            <a href="/" class="btn btn-info btn-lg btn-icon icon-right">Home</a>
                             <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                                 Masuk
                             </button>

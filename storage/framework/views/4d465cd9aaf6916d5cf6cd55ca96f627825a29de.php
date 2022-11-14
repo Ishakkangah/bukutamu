@@ -5,7 +5,7 @@
     <?php echo $__env->make('layouts.navigasi', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="main-content">
         <section>
-            <div class="section-header bg-white py-2 rounded">
+            <div class="px-4 section-header bg-white py-2 rounded">
                 <div class="container my-3 mb-5">
                     <?php echo $__env->make('components.title', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <div class="d-flex justify-content-between align-items-center">

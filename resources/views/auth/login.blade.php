@@ -38,6 +38,7 @@
                             {{-- <a href="auth-forgot-password.html" class="float-left mt-3">
                                 Lupa password
                             </a> --}}
+                            <a href="/" class="btn btn-info btn-lg btn-icon icon-right">Home</a>
                             <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                                 Masuk
                             </button>

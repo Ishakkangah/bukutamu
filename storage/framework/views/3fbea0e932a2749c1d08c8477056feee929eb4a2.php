@@ -12,7 +12,7 @@
 <!-- Styles -->
 <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
 
-<link rel="stylesheet" href="<?php echo e(asset('mycss/main.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/myCss.css')); ?>">
 
 
 

@@ -13,7 +13,7 @@
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 {{-- MY CSS --}}
-<link rel="stylesheet" href="{{ asset('mycss/main.css') }}">
+<link rel="stylesheet" href="{{ asset('css/myCss.css') }}">
 
 
 {{-- STISLA --}}

@@ -4,7 +4,7 @@
     @include('layouts.navigasi')
     <div class="main-content">
         <section>
-            <div class="section-header bg-white py-2 rounded">
+            <div class="px-4 section-header bg-white py-2 rounded">
                 @include('components.title')
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="table-responsive">

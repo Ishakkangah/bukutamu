@@ -5,10 +5,6 @@ use App\Models\bukutamu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/testing', function () {
-    $data = bukutamu::get();
-    return view('bukutamu.cetakBukuTamuBerdasarkanPilihan', compact('data'));
-});
 
 Route::get('cari', [BukutamuController::class, 'cari'])->name('cari');
 Route::get('/', [BukutamuController::class, 'index']);

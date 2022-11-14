@@ -7,8 +7,7 @@
         <div class="main-content">
             {{-- DISINI CONTENT --}}
             <section>
-                <div class="section-header  bg-white py-2 rounded">
-                    @include('components.alert')
+                <div class="px-4 section-header  bg-white py-2 rounded">
                     @include('components.title')
                     @include('components.info')
                     @if (Auth::user())
@@ -103,104 +102,140 @@
         </div>
         @include('layouts.footer')
     @else
-        <div class="container px-5 py-2 mb-5 mt-5" style="background: url('{{ asset('img/leaves.webp') }}')">
-
-            <h3 class="mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
-            @include('components.alertForm')
-            <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
-                @method('patch')
-                @csrf
-
-                <div class="mb-3">
-                    <label for="name" class="form-label text-muted">NAMA</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Masukan nama"
-                        value="{{ old('name') }}">
-                    @error('name')
-                        <small class="text-danger">
-                            <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
-                        </small>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="instansi" class="form-label text-muted">INSTANSI</label>
-                    <input type="text" class="form-control" name="instansi" id="instansi" placeholder="Masukan instansi"
-                        value="{{ old('instansi') }}">
-                    @error('instansi')
-                        <small class="text-danger">
-                            <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
-                        </small>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="perihal" class="form-label text-muted">PERIHAL</label>
-                    <input type="text" class="form-control" id="perihal" name="perihal" placeholder="Masukan perihal"
-                        value="{{ old('perihal') }}">
-                    @error('perihal')
-                        <small class="text-danger">
-                            <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
-                        </small>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="tujuan" class="form-label text-muted">TUJUAN</label>
-                    <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Masukan tujuan"
-                        value="{{ old('tujuan') }}">
-                    @error('tujuan')
-                        <small class="text-danger">
-                            <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
-                        </small>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="keterangan" class="form-label text-muted">KETERANGAN</label>
-                    <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan keterangan"
-                        value="{{ old('keterangan') }}"></textarea>
-                    @error('keterangan')
-                        <small class="text-danger">
-                            <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
-                        </small>
-                    @enderror
-                </div>
-                {{-- START WEBCAM --}}
-                <div class="mb-5">
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-md-6">
-                            <div class="alert alert-warning  peringatan">Poto anda akan tampil disini!</div>
-                            <div class="d-flex justify-content-start   position-relative">
-                                <div class="card-img-top mr-2 rounded position-absolute" id="results">
-                                    {{-- <img src="{{ asset('img/nikita.jpg') }}" class="card-img-top shadow" alt="Preview Photo"> --}}
-                                </div>
-                                <div class="card-img-top mr-2 rounded position-absolute" id="my_camera">
-                                    @error('thumbnail')
-                                        <small class="text-danger">
-                                            <div class="bg-danger rounded text-white mt-1 px-2 py-2">
-                                                {{ $message }}</div>
-                                        </small>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="alert alert-success opacity-0 berhasil-upload">Poto berhasil di simpan!
-                            </div>
-                            <div class="form-group row" style="flex-flow: row-reverse;">
-                                <div class="pr-5 d-flex justify-content-end">
-                                    <input type="button" class=" btn btn-primary mx-2" value="BUKA KAMERA"
-                                        onClick="buka_kamera()" />
-                                    <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO"
-                                        onClick="ambil_photo()" />
-                                    <button type="submit" class="btn btn-success mx-2">SIMPAN</button>
-                                    <a href="/" class="btn btn-danger ">BATAL</a>
-                                    <input type="hidden" name="thumbnail" id="image_tag">
-                                </div>
-                            </div>
-
-                        </div>
+        {{-- START FORM TAMU --}}
+        <div class="card_ku">
+            <div class="circle position-absolute">
+                <img src="{{ asset('img/logo_kominfo1.png') }}" alt="kominfo_logo">
+            </div>
+            <div class="row container mx-auto">
+                <div class="col-md-6 colum_kanan">
+                    <div>
+                        <h2>Buku Tamu</h2>
+                        <h3>Silahkan isi data anda di</h3>
+                        <h3>Buku tamu digital kami</h3>
                     </div>
-
+                    <div>
+                        <img src="{{ asset('img/book.png') }}" class="buku" alt="book" />
+                    </div>
                 </div>
-                {{-- END START --}}
-            </form>
+                <div class="col-md-6 colum_kiri">
+                    <div class="wrapper">
+                        @include('components.alertForm')
+                        <form action="{{ route('store') }}" method="post" enctype="multipart/form-data" class="">
+                            @method('patch')
+                            @csrf
+
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Nama"
+                                    required value="{{ old('name') }}">
+                                @error('name')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                        </div>
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="instansi" id="instansi" required
+                                    placeholder="Instansi" value="{{ old('instansi') }}">
+                                @error('instansi')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                        </div>
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="perihal" name="perihal" required
+                                    placeholder="Perihal" value="{{ old('perihal') }}">
+                                @error('perihal')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                        </div>
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="tujuan" name="tujuan" required
+                                    placeholder="Tujuan" value="{{ old('tujuan') }}">
+                                @error('tujuan')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                        </div>
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <textarea type="text" class="form-control textarea1" id="keterangan" name="keterangan" placeholder="Keterangan"
+                                    style=" max-width:100%;min-height:50px;height:100%;width:100%;" value="{{ old('keterangan') }}" required></textarea>
+                                @error('keterangan')
+                                    <small class="text-danger">
+                                        <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                        </div>
+                                    </small>
+                                @enderror
+                            </div>
+                            {{-- START WEBCAM --}}
+                            <div class="mb-4">
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-md-6">
+                                        <div class="peringatan">
+                                        </div>
+                                        <div class="d-flex justify-content-start   position-relative">
+                                            <div class="card-img-top mr-2 rounded position-absolute" id="results">
+                                                {{-- Hasil gambar tampil disini --}}
+                                            </div>
+                                            @error('thumbnail')
+                                                <small class="text-danger">
+                                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">
+                                                        {{ $message }}</div>
+                                                </small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row" style="flex-flow: row-reverse;">
+                                            <div class=" d-flex justify-content-end">
+                                                <input type="button"
+                                                    class=" btn btn-primary mx-2 bukaKamera tampilKamera"
+                                                    value="BUKA KAMERA" onClick="buka_kamera()" data-toggle="modal"
+                                                    data-target="#cameraModal" />
+                                                <button type="submit" class="btn btn-success mx-2"
+                                                    class="btnSimpanPoto">SIMPAN</button>
+                                                <input type="hidden" name="thumbnail" id="image_tag">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{-- END START --}}
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- MODALCAMERA -->
+        {{-- END FORM TAMU --}}
+
+
+
+
+        {{-- Start modal camera --}}
+        <div class="modal d-none" tabindex="-1" id="cameraModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body" id="my_camera">
+                        {{-- DISINI WEBCAM TAMPIL --}}
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <span class="btn btn-danger btnBatalAmbilGambarWebcam">BATAL</span>
+                        <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO"
+                            onClick="ambil_photo()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end modal camera --}}
     @endif
 @endsection
