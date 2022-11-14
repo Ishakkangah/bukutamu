@@ -1,55 +1,53 @@
-<nav class="navbar navbar-expand-md navbar-light  shadow navigasi_saya">
-    <div class="container">
-        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-            <img src="<?php echo e(asset('img/kominfo.png')); ?>" width="250px" alt="Kominfo-oki">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto ">
-
-
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                <?php if(auth()->guard()->guest()): ?>
-                    <?php if(Route::has('login')): ?>
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold text-muted" href="<?php echo e(route('login')); ?>">MASUK</a>
-                        </li>
-                    <?php endif; ?>
-
+<?php if(Auth::user()): ?>
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li>
+                        <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+            </form>
+            <ul class="navbar-nav navbar-right">
+                <li class="dropdown dropdown-list-toggle">
                     
-                <?php else: ?>
-                    <li class="nav-item dropdown ">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img class="rounded-circle mr-2" src="https://www.gravatar.com/avatar/" width="25px"
-                                height="25px">
-                            <span><?php echo e(strtoupper(Auth::user()->name)); ?></span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-                                onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                Keluar
-                            </a>
-
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="image" src="<?php echo e(asset('assets/img/avatar/avatar-1.png')); ?>"
+                            class="rounded-circle mr-1" />
+                        <div class="d-sm-none d-lg-inline-block"><?php echo e(auth()->user()->name); ?></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="<?php echo e(route('logout')); ?>" class="dropdown-item has-icon"
+                            onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
                             <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
                                 <?php echo csrf_field(); ?>
                             </form>
-                        </div>
-                    </li>
-                <?php endif; ?>
+                            <i class="far fa-user"></i> Keluar
+                        </a>
+                    </div>
+                </li>
             </ul>
+        </nav>
+        <div class="main-sidebar sidebar-style-2">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand mt-2">
+                    <a href="#"><img src="<?php echo e(asset('img/logo_kominfo1.png')); ?>" alt="diskomimfo_oki"
+                            width="180px" /></a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="#"><img src="<?php echo e(asset('img/logo_pemda.png')); ?>" alt="diskomimfo_oki"
+                            width="30px" /></a>
+                </div>
+                
+                <?php echo $__env->make('layouts.menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            </aside>
         </div>
     </div>
-</nav>
+<?php else: ?>
+    <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> <?php echo $__env->make('bukutamu.create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?>
 <?php /**PATH D:\buku_tamu\resources\views/layouts/navigasi.blade.php ENDPATH**/ ?>

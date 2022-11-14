@@ -12,7 +12,6 @@
 
 <body>
     <div id="app">
-        
         <main>
             <?php echo $__env->yieldContent('content'); ?>
         </main>

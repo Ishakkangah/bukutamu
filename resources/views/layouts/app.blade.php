@@ -12,7 +12,6 @@
 
 <body>
     <div id="app">
-        {{-- @include('layouts.navigasi') --}}
         <main>
             @yield('content')
         </main>

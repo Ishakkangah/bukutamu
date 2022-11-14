@@ -4,7 +4,6 @@
         <tr>
             <th scope="row" class="text-center text-muted align-middle"><?php echo e($i++); ?></th>
             <?php if(auth()->user()->role_id === 3): ?>
-            
                 <td class="align-middle">
                     
                     <div class="d-flex justify-content-center">

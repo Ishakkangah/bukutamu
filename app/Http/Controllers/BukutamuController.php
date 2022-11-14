@@ -7,7 +7,6 @@ use App\Http\Requests\UpdatebukutamuRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,16 +17,36 @@ class BukutamuController extends Controller
     public function index()
     {
         $alert =  'Harap di isi dengan sebenar-benar nya dikolom yang sudah disediakan.';
+        $totalTamuHariIni = bukutamu::whereDate('created_at', carbon::now())->count();
+        $totalTamuMingguIni = bukutamu::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()
+        ])->count();
+        $totalTamuBulanIni = bukutamu::whereBetween('created_at', [
+            Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()
+        ])->count();
+        $totalAdmin = User::where('role_id', 3)->count();
         $bukutamus = bukutamu::latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
         return view('bukutamu.index', [
             'bukutamus' => $bukutamus,
-            'alert' => $alert
+            'alert' => $alert,
+            'totalTamuHariIni' => $totalTamuHariIni,
+            'totalTamuMingguIni' => $totalTamuMingguIni,
+            'totalTamuBulanIni' => $totalTamuBulanIni,
+            'totalAdmin' => $totalAdmin,
         ]);
     }
 
     // CARI TAMU
     public function cari(Request $request)
     {
+        $totalTamuHariIni = bukutamu::whereDate('created_at', carbon::now())->count();
+        $totalTamuMingguIni = bukutamu::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()
+        ])->count();
+        $totalTamuBulanIni = bukutamu::whereBetween('created_at', [
+            Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()
+        ])->count();
+        $totalAdmin = User::where('role_id', 3)->count();
         $alert =  'Harap di isi dengan sebenar-benar nya dikolom yang sudah disediakan.';
         $cariTamu =  $request->cari;
         $bukutamus = bukutamu::latest()
@@ -36,7 +55,7 @@ class BukutamuController extends Controller
             ->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')
             ->paginate(20);
 
-        return view('bukutamu.index', compact('bukutamus', 'alert'));
+        return view('bukutamu.index', compact('bukutamus', 'alert', 'totalTamuHariIni', 'totalTamuMingguIni', 'totalTamuBulanIni', 'totalAdmin'));
     }
 
     // CREATE TAMU
@@ -102,7 +121,7 @@ class BukutamuController extends Controller
         bukutamu::create($attr);
         Alert::success('Data berhasil disimpan!', 'Silahkan Masuk!');
 
-        return redirect('/create')->with('success', 'Data berhasil di simpan');
+        return redirect('/')->with('success', 'Data berhasil di simpan');
     }
 
     // DETAIL DATA TAMU
@@ -172,7 +191,7 @@ class BukutamuController extends Controller
 
 
     // TOTAL TAMU MINGGU INI
-    function totalTamuBulanIni(Request $request)
+    function totalTamuMingguIni(Request $request)
     {
         $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->latest()->select('id', 'name', 'thumbnail', 'instansi', 'perihal', 'tujuan', 'keterangan', 'created_at')->paginate(120);
         $hariPertama = Carbon::now()->startOfWeek();
@@ -202,6 +221,33 @@ class BukutamuController extends Controller
         return $pdf->download('laporan-buku-tamu.pdf');
     }
 
+    // FILTER BUKU TAMU
+    function filterTamu(Request $request)
+    {
+        $data = bukutamu::latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
+        return view('bukutamu.filter', [
+            'data' => $data,
+            'tanggal_mulai' => '',
+            'sampai_tanggal' => '',
+        ]);
+    }
+
+    function tampilkanBukuTamuBerdasarkanFilter(Request $request)
+    {
+        $tanggal_mulai =  $request->tanggal_mulai;
+        $sampai_tanggal =  $request->sampai_tanggal;
+        $data = bukutamu::whereBetween('created_at', [
+            $tanggal_mulai,
+            $sampai_tanggal
+        ])->latest()->paginate(20);
+        $alert = '';
+        return view('bukutamu.filter', [
+            'data' => $data,
+            'alert' => $alert,
+            'tanggal_mulai' => $tanggal_mulai,
+            'sampai_tanggal' => $sampai_tanggal,
+        ]);
+    }
 
     // CETAK BUKU TAMU BERDASARKAN PILIHAN 
     function cetakBukuTamuBerdasarkanPilihan(Request $request)

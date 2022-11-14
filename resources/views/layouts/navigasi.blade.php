@@ -1,58 +1,52 @@
-<nav class="navbar navbar-expand-md navbar-light  shadow navigasi_saya">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('img/kominfo.png') }}" width="250px" alt="Kominfo-oki">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto ">
-
-
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold text-muted" href="{{ route('login') }}">MASUK</a>
-                        </li>
-                    @endif
-
-                    {{-- @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold text-muted" href="{{ route('register') }}">DAFTAR</a>
-                        </li>
-                    @endif --}}
-                @else
-                    <li class="nav-item dropdown ">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img class="rounded-circle mr-2" src="https://www.gravatar.com/avatar/" width="25px"
-                                height="25px">
-                            <span>{{ strtoupper(Auth::user()->name) }}</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                Keluar
-                            </a>
-
+@if (Auth::user())
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li>
+                        <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+            </form>
+            <ul class="navbar-nav navbar-right">
+                <li class="dropdown dropdown-list-toggle">
+                    {{-- BUAT DISINI JIKA MENAMBAHKAN MENU --}}
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
+                            class="rounded-circle mr-1" />
+                        <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->name }}</div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="{{ route('logout') }}" class="dropdown-item has-icon"
+                            onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                        </div>
-                    </li>
-                @endguest
+                            <i class="far fa-user"></i> Keluar
+                        </a>
+                    </div>
+                </li>
             </ul>
+        </nav>
+        <div class="main-sidebar sidebar-style-2">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand mt-2">
+                    <a href="#"><img src="{{ asset('img/logo_kominfo1.png') }}" alt="diskomimfo_oki"
+                            width="180px" /></a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="#"><img src="{{ asset('img/logo_pemda.png') }}" alt="diskomimfo_oki"
+                            width="30px" /></a>
+                </div>
+                {{-- {% include "layouts/menu.html" %} --}}
+                @include('layouts.menu')
+            </aside>
         </div>
     </div>
-</nav>
+@else
+    @include('components.alertForm') @include('bukutamu.create')
+@endif

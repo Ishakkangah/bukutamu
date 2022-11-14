@@ -1,4 +1,4 @@
-<h2 class="text-muted text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
+<h2 class="text-center mb-5">DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN OGAN
     KOMERING ILIR
 </h2>
 <?php /**PATH D:\buku_tamu\resources\views/components/title.blade.php ENDPATH**/ ?>

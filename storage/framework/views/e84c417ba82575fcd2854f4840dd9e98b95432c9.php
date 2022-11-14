@@ -1,10 +1,9 @@
-<!-- Footer-->
-<footer class="pt-3 bg-dark fixed-bottom">
-    <div class="container">
-        <p class="m-0 text-center text-white"> &copy; KOMINFO OKI <?= date('d-M-y') ?></p>
+<footer class="main-footer">
+    <div class="footer-left">
+        Copyright &copy; <?php echo date('Y'); ?>
+        <div class="bullet"></div>
+        <span>buku tamu DISKOMINFO OKI</span>
     </div>
-    <div class="container">
-        <p class="m-0 text-center text-white">Ogan komering ilir ~ Sumatera selatan</p>
-    </div>
+    <div class="footer-right">Version 1</div>
 </footer>
 <?php /**PATH D:\buku_tamu\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
