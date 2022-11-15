@@ -1,6 +1,5 @@
 .card_ku {
     background: linear-gradient(to right, #0e567c, #80a5b8);
-    height: 110vh;
     display: flex;
     overflow: hidden;
 }
@@ -31,6 +30,7 @@
 
 .colum_kiri {
     /* background-color: green; */
+    margin-bottom: 50px;
 }
 
 .wrapper {
@@ -87,4 +87,80 @@ textarea {
     position: absolute;
     top: 60%;
     width: 140px;
+}
+
+@media (max-width: 504px) {
+    .title_ku {
+        line-height: 30px;
+    }
+}
+@media (max-width: 700px) {
+    .circle {
+        display: none;
+    }
+    .colum_kanan {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+    .colum_kanan h3 {
+        font-size: 2em;
+    }
+    .wrapper {
+        padding: 5px;
+    }
+    .title_ku {
+        font-size: 1.5em;
+    }
+}
+@media (max-width: 803px) {
+    .circle {
+        top: -50%;
+        left: 100px;
+        width: 200px;
+        height: 200px;
+    }
+    .flex_ku {
+        display: flex;
+        flex-direction: column;
+    }
+    .colum_kanan {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+    .colum_kanan h3 {
+        font-size: 2em;
+    }
+    .wrapper {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 1005px) {
+    .circle {
+        top: -50%;
+        left: 100px;
+        width: 200px;
+        height: 200px;
+    }
+    .flex_ku {
+        display: flex;
+        flex-direction: column;
+    }
+    .colum_kanan {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .circle {
+        top: -50%;
+        left: 100px;
+        width: 250px;
+        height: 250px;
+    }
+    .colum_kanan {
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
 }
