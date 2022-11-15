@@ -12,7 +12,8 @@
 
                     <h3 class="mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
                     @include('components.alertForm')
-                    <form action="{{ route('store') }}" method="post" enctype="multipart/form-data" class="">
+                    <form action="{{ route('store') }}" method="post" enctype="multipart/form-data" class=""
+                        autocomplete="off">
                         @method('patch')
                         @csrf
 
@@ -47,8 +48,29 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Tujuan"
-                                value="{{ old('tujuan') }}" required>
+                            <select type="text" class="form-control" id="tujuan" name="tujuan"
+                                value="{{ old('tujuan') }}" required="required">
+                                <option disabled selected>Pilih tujuan</option>
+                                <option value="Kepala Dinas" {{ old('tujuan') == 'Kepala Dinas' ? 'selected' : '' }}>
+                                    Kepala Dinas</option>
+                                <option value="Sekretaris" {{ old('tujuan') == 'Sekretaris' ? 'selected' : '' }}>
+                                    Sekretaris</option>
+                                <option value="Sekretariat" {{ old('tujuan') == 'Sekretariat' ? 'selected' : '' }}>
+                                    Sekretariat</option>
+                                <option value="Bidang Layanan E-Goverment"
+                                    {{ old('tujuan') == 'Bidang Layanan E-Goverment' ? 'selected' : '' }}>Bidang
+                                    Layanan E-Goverment</option>
+                                <option value="Bidang Statistik & PIP"
+                                    {{ old('tujuan') == 'Bidang Statistik & PIP' ? 'selected' : '' }}>Bidang
+                                    Statistik & PIP</option>
+                                <option value="Bidang TIK" {{ old('tujuan') == 'Bidang TIK' ? 'selected' : '' }}>
+                                    Bidang TIK</option>
+                                <option value="Bidang PKP" {{ old('tujuan') == 'Bidang PKP' ? 'selected' : '' }}>
+                                    Bidang PKP</option>
+                                <option value="Bidang Persandian"
+                                    {{ old('tujuan') == 'Bidang Persandian' ? 'selected' : '' }}>Bidang
+                                    Persandian</option>
+                            </select>
                             @error('tujuan')
                                 <small class="text-danger">
                                     <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
@@ -58,7 +80,7 @@
                         </div>
                         <div class="mb-3">
                             <textarea type="text" class="form-control textarea1" id="keterangan" name="keterangan" placeholder="Keterangan"
-                                style=" max-width:100%;min-height:50px;height:100%;width:100%;" value="{{ old('keterangan') }}" required></textarea>
+                                style=" max-width:100%;min-height:50px;height:100%;width:100%;" required>{{ old('keterangan') }}</textarea>
                             @error('keterangan')
                                 <small class="text-danger">
                                     <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
@@ -77,10 +99,10 @@
                                             {{-- Hasil gambar tampil disini --}}
                                         </div>
                                         @error('thumbnail')
-                                            <small class="text-danger">
+                                            <div class="text-danger">
                                                 <div class="bg-danger rounded text-white mt-1 px-2 py-2">
-                                                    {{ $message }}</div>
-                                            </small>
+                                                    Pastikan Anda telah membuka tombol kamara !</div>
+                                            </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -91,7 +113,7 @@
                                                 value="BUKA KAMERA" onClick="buka_kamera()" data-toggle="modal"
                                                 data-target="#cameraModal" />
                                             <button type="submit" class="btn btn-success mx-2"
-                                                class="btnSimpanPoto">SIMPAN</button>
+                                                id="btnSimpanPoto">SIMPAN</button>
                                             <input type="hidden" name="thumbnail" id="image_tag">
                                         </div>
                                     </div>

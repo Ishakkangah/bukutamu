@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bukutamu;
-use App\Http\Requests\UpdatebukutamuRequest;
-use App\Models\User;
+use App\Models\{bukutamu, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

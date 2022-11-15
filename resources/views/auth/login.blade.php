@@ -9,7 +9,8 @@
                     <h4 class="text-dark font-weight-normal">Selamat datang di <span class="font-weight-bold">DISKOMINFO
                             OKI</span>
                     </h4>
-                    <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+                    <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate
+                        autocomplete="off">
                         @csrf
                         <div class="form-group">
                             <label for="username">Username</label>

@@ -7,7 +7,8 @@
                     <h4 class="text-dark font-weight-normal">Selamat datang di <span class="font-weight-bold">DISKOMINFO
                             OKI</span>
                     </h4>
-                    <form method="POST" action="<?php echo e(route('login')); ?>" class="needs-validation" novalidate="">
+                    <form method="POST" action="<?php echo e(route('login')); ?>" class="needs-validation" novalidate
+                        autocomplete="off">
                         <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <label for="username">Username</label>

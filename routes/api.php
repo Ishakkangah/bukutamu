@@ -5,4 +5,4 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [BukutamuController::class, 'index']);
+// Route::get('/', [BukutamuController::class, 'index']);/

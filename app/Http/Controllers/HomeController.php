@@ -12,9 +12,9 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        $bukutamus = bukutamu::latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
-        return view('bukutamu.index', compact('bukutamus'));
-    }
+    // public function index()
+    // {
+    //     $bukutamus = bukutamu::latest()->select('id', 'thumbnail', 'name', 'instansi', 'perihal', 'created_at')->paginate(20);
+    //     return view('bukutamu.index', compact('bukutamus'));
+    // }
 }

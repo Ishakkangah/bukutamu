@@ -12,7 +12,8 @@
 
                     <h3 class="mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
                     <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                    <form action="<?php echo e(route('store')); ?>" method="post" enctype="multipart/form-data" class="">
+                    <form action="<?php echo e(route('store')); ?>" method="post" enctype="multipart/form-data" class=""
+                        autocomplete="off">
                         <?php echo method_field('patch'); ?>
                         <?php echo csrf_field(); ?>
 
@@ -71,8 +72,29 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Tujuan"
-                                value="<?php echo e(old('tujuan')); ?>" required>
+                            <select type="text" class="form-control" id="tujuan" name="tujuan"
+                                value="<?php echo e(old('tujuan')); ?>" required="required">
+                                <option disabled selected>Pilih tujuan</option>
+                                <option value="Kepala Dinas" <?php echo e(old('tujuan') == 'Kepala Dinas' ? 'selected' : ''); ?>>
+                                    Kepala Dinas</option>
+                                <option value="Sekretaris" <?php echo e(old('tujuan') == 'Sekretaris' ? 'selected' : ''); ?>>
+                                    Sekretaris</option>
+                                <option value="Sekretariat" <?php echo e(old('tujuan') == 'Sekretariat' ? 'selected' : ''); ?>>
+                                    Sekretariat</option>
+                                <option value="Bidang Layanan E-Goverment"
+                                    <?php echo e(old('tujuan') == 'Bidang Layanan E-Goverment' ? 'selected' : ''); ?>>Bidang
+                                    Layanan E-Goverment</option>
+                                <option value="Bidang Statistik & PIP"
+                                    <?php echo e(old('tujuan') == 'Bidang Statistik & PIP' ? 'selected' : ''); ?>>Bidang
+                                    Statistik & PIP</option>
+                                <option value="Bidang TIK" <?php echo e(old('tujuan') == 'Bidang TIK' ? 'selected' : ''); ?>>
+                                    Bidang TIK</option>
+                                <option value="Bidang PKP" <?php echo e(old('tujuan') == 'Bidang PKP' ? 'selected' : ''); ?>>
+                                    Bidang PKP</option>
+                                <option value="Bidang Persandian"
+                                    <?php echo e(old('tujuan') == 'Bidang Persandian' ? 'selected' : ''); ?>>Bidang
+                                    Persandian</option>
+                            </select>
                             <?php $__errorArgs = ['tujuan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -90,7 +112,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="mb-3">
                             <textarea type="text" class="form-control textarea1" id="keterangan" name="keterangan" placeholder="Keterangan"
-                                style=" max-width:100%;min-height:50px;height:100%;width:100%;" value="<?php echo e(old('keterangan')); ?>" required></textarea>
+                                style=" max-width:100%;min-height:50px;height:100%;width:100%;" required><?php echo e(old('keterangan')); ?></textarea>
                             <?php $__errorArgs = ['keterangan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -121,10 +143,10 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <small class="text-danger">
+                                            <div class="text-danger">
                                                 <div class="bg-danger rounded text-white mt-1 px-2 py-2">
-                                                    <?php echo e($message); ?></div>
-                                            </small>
+                                                    Pastikan Anda telah membuka tombol kamara !</div>
+                                            </div>
                                         <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
@@ -138,7 +160,7 @@ unset($__errorArgs, $__bag); ?>
                                                 value="BUKA KAMERA" onClick="buka_kamera()" data-toggle="modal"
                                                 data-target="#cameraModal" />
                                             <button type="submit" class="btn btn-success mx-2"
-                                                class="btnSimpanPoto">SIMPAN</button>
+                                                id="btnSimpanPoto">SIMPAN</button>
                                             <input type="hidden" name="thumbnail" id="image_tag">
                                         </div>
                                     </div>

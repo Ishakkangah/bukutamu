@@ -44,7 +44,7 @@ document.body.addEventListener("click", function (e) {
     }
 });
 
-const btnSimpanPoto = document.querySelector(".btnSimpanPoto");
+const btnSimpanPoto = document.getElementById("btnSimpanPoto");
 btnSimpanPoto.addEventListener("click", function () {
     bukaKamera.classList.replace("hilangkanKamera", "tampilKamera");
 });

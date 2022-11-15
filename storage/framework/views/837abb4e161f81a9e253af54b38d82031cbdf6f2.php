@@ -123,10 +123,35 @@
                 <div class="col-md-6 colum_kiri">
                     <div class="wrapper">
                         <?php echo $__env->make('components.alertForm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                        <form action="<?php echo e(route('store')); ?>" method="post" enctype="multipart/form-data" class="">
+                        <div class="alert alert-warning alert-dismissible fade show text-white" role="alert">
+                            <strong class="text-white">Sebelum mengisi kolom yang disediakan wajib mengambil gambar!
+                        </div>
+
+                        <form action="<?php echo e(route('store')); ?>" method="post" enctype="multipart/form-data" class=""
+                            autocomplete="off">
                             <?php echo method_field('patch'); ?>
                             <?php echo csrf_field(); ?>
-
+                            <div class="mb-3">
+                                <div class=" d-flex justify-content-start">
+                                    <input type="button" class=" btn btn-primary mx-2 bukaKamera tampilKamera"
+                                        value="BUKA KAMERA" onClick="buka_kamera()" data-toggle="modal"
+                                        data-target="#cameraModal" />
+                                    <input type="hidden" name="thumbnail" id="image_tag">
+                                    <?php $__errorArgs = ['thumbnail'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <div class="text-danger">
+                                            <div class="bg-danger rounded text-white px-2 py-2">
+                                                Pastikan anda telah memasukan poto!</div>
+                                        </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Nama"
                                     required value="<?php echo e(old('name')); ?>">
@@ -147,7 +172,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="mb-3">
                                 <input type="text" class="form-control" name="instansi" id="instansi" required
-                                    placeholder="Instansi" value="<?php echo e(old('instansi')); ?>">
+                                    placeholder="Instansi asal" value="<?php echo e(old('instansi')); ?>">
                                 <?php $__errorArgs = ['instansi'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -182,8 +207,29 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="tujuan" name="tujuan" required
-                                    placeholder="Tujuan" value="<?php echo e(old('tujuan')); ?>">
+                                <select type="text" class="form-control" id="tujuan" name="tujuan"
+                                    value="<?php echo e(old('tujuan')); ?>" required="required">
+                                    <option disabled selected>Pilih tujuan</option>
+                                    <option value="Kepala Dinas" <?php echo e(old('tujuan') == 'Kepala Dinas' ? 'selected' : ''); ?>>
+                                        Kepala Dinas</option>
+                                    <option value="Sekretaris" <?php echo e(old('tujuan') == 'Sekretaris' ? 'selected' : ''); ?>>
+                                        Sekretaris</option>
+                                    <option value="Sekretariat" <?php echo e(old('tujuan') == 'Sekretariat' ? 'selected' : ''); ?>>
+                                        Sekretariat</option>
+                                    <option value="Bidang Layanan E-Goverment"
+                                        <?php echo e(old('tujuan') == 'Bidang Layanan E-Goverment' ? 'selected' : ''); ?>>Bidang
+                                        Layanan E-Goverment</option>
+                                    <option value="Bidang Statistik & PIP"
+                                        <?php echo e(old('tujuan') == 'Bidang Statistik & PIP' ? 'selected' : ''); ?>>Bidang
+                                        Statistik & PIP</option>
+                                    <option value="Bidang TIK" <?php echo e(old('tujuan') == 'Bidang TIK' ? 'selected' : ''); ?>>
+                                        Bidang TIK</option>
+                                    <option value="Bidang PKP" <?php echo e(old('tujuan') == 'Bidang PKP' ? 'selected' : ''); ?>>
+                                        Bidang PKP</option>
+                                    <option value="Bidang Persandian"
+                                        <?php echo e(old('tujuan') == 'Bidang Persandian' ? 'selected' : ''); ?>>Bidang
+                                        Persandian</option>
+                                </select>
                                 <?php $__errorArgs = ['tujuan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -200,8 +246,10 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="mb-3">
-                                <textarea type="text" class="form-control textarea1" id="keterangan" name="keterangan" placeholder="Keterangan"
-                                    style=" max-width:100%;min-height:50px;height:100%;width:100%;" value="<?php echo e(old('keterangan')); ?>" required></textarea>
+                                <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                    placeholder="Nomor HP yang dapat dihubungi"
+                                    style=" max-width:100%;min-height:50px;height:100%;width:100%;"
+                                    value="<?php echo e(old('keterangan')); ?>" required>
                                 <?php $__errorArgs = ['keterangan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -227,36 +275,20 @@ unset($__errorArgs, $__bag); ?>
                                             <div class="card-img-top mr-2 rounded position-absolute" id="results">
                                                 
                                             </div>
-                                            <?php $__errorArgs = ['thumbnail'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                <small class="text-danger">
-                                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">
-                                                        <?php echo e($message); ?></div>
-                                                </small>
-                                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row" style="flex-flow: row-reverse;">
                                             <div class=" d-flex justify-content-end">
-                                                <input type="button"
-                                                    class=" btn btn-primary mx-2 bukaKamera tampilKamera"
-                                                    value="BUKA KAMERA" onClick="buka_kamera()" data-toggle="modal"
-                                                    data-target="#cameraModal" />
                                                 <button type="submit" class="btn btn-success mx-2"
-                                                    class="btnSimpanPoto">SIMPAN</button>
-                                                <input type="hidden" name="thumbnail" id="image_tag">
+                                                    id="btnSimpanPoto">SIMPAN</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <?php
+                                    echo date('j F, Y');
+                                ?>
                             </div>
                             
                         </form>
