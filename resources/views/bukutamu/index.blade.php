@@ -107,7 +107,7 @@
             <div class="circle position-absolute">
                 <img src="{{ asset('img/logo_kominfo1.png') }}" alt="kominfo_logo">
             </div>
-            <div class="row container mx-auto">
+            <div class="row container mx-auto flex_ku">
                 <div class="col-md-6 colum_kanan">
                     <div>
                         <h2>Buku Tamu</h2>

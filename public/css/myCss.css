@@ -88,10 +88,20 @@ textarea {
     top: 60%;
     width: 140px;
 }
-
+.text_ku {
+    font-size: 3.3em;
+    font-weight: 700;
+}
+.text-ku2 {
+    font-size: 2.8em;
+}
 @media (max-width: 504px) {
     .title_ku {
         line-height: 30px;
+    }
+    .text_ku {
+        font-size: 1.5em;
+        font-weight: 500;
     }
 }
 @media (max-width: 700px) {
@@ -110,6 +120,9 @@ textarea {
     }
     .title_ku {
         font-size: 1.5em;
+    }
+    .text_ku {
+        font-size: 1.7em;
     }
 }
 @media (max-width: 803px) {
