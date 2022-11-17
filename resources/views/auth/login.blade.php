@@ -64,7 +64,8 @@
                             <div class="mb-2 text_ku font-weight-bold">@php
                                 echo date('j F, Y');
                             @endphp</div>
-                            <div class="font-weight-normal text-muted-transparent">Ogan Komering Ilir, Sumatera Selatan
+                            <div class="font-weight-normal text-ku2 text-muted-transparent">Ogan Komering Ilir, Sumatera
+                                Selatan
                             </div>
                         </div>
                     </div>

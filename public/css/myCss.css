@@ -2,6 +2,8 @@
     background: linear-gradient(to right, #0e567c, #80a5b8);
     display: flex;
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 .colum_kanan {
