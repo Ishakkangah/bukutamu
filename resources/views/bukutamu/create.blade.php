@@ -88,6 +88,22 @@
                                 </small>
                             @enderror
                         </div>
+                        {{-- Start modal camera --}}
+                        <div class="modal" tabindex="-1" id="cameraModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body" id="my_camera">
+                                        {{-- DISINI WEBCAM TAMPIL --}}
+                                    </div>
+                                    <div class="modal-footer bg-whitesmoke br">
+                                        <span class="btn btn-danger btnBatalAmbilGambarWebcam">BATAL</span>
+                                        <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO"
+                                            onClick="ambil_photo()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- end modal camera --}}
                         {{-- START WEBCAM --}}
                         <div class="mb-4">
                             <div class="row d-flex justify-content-between">
@@ -127,19 +143,4 @@
             </div>
         </section>
     </div>
-    {{-- Start modal camera --}}
-    <div class="modal d-none" tabindex="-1" id="cameraModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body" id="my_camera">
-                    {{-- DISINI WEBCAM TAMPIL --}}
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <span class="btn btn-danger btnBatalAmbilGambarWebcam">BATAL</span>
-                    <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO" onClick="ambil_photo()" />
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end modal camera --}}
 @endsection

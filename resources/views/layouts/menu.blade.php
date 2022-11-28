@@ -112,7 +112,7 @@
             <div class="modal-header">
                 <h5 class="modal-title">Download PDF</h5>
             </div>
-            <form action="{{ route('cetakBukuTamuBerdasarkanPilihan') }}" class="d-flex flex-column">
+            <form action="{{ route('cetakExcelBukuTamuBerdasarkanFilter') }}" class="d-flex flex-column">
                 <div class="modal-body">
                     <div class="form-group mx-2">
                         <label for="tanggal_mulai text-muted">Mulai tanggal</label>

@@ -129,6 +129,22 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
                         
+                        <div class="modal" tabindex="-1" id="cameraModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body" id="my_camera">
+                                        
+                                    </div>
+                                    <div class="modal-footer bg-whitesmoke br">
+                                        <span class="btn btn-danger btnBatalAmbilGambarWebcam">BATAL</span>
+                                        <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO"
+                                            onClick="ambil_photo()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                         <div class="mb-4">
                             <div class="row d-flex justify-content-between">
                                 <div class="col-md-6">
@@ -174,21 +190,6 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </section>
     </div>
-    
-    <div class="modal d-none" tabindex="-1" id="cameraModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body" id="my_camera">
-                    
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <span class="btn btn-danger btnBatalAmbilGambarWebcam">BATAL</span>
-                    <input type="button" class="btn btn-primary  mx-2" value="AMBIL PHOTO" onClick="ambil_photo()" />
-                </div>
-            </div>
-        </div>
-    </div>
-    
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\buku_tamu\resources\views/bukutamu/create.blade.php ENDPATH**/ ?>

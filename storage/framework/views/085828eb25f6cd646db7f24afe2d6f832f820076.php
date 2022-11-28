@@ -126,7 +126,7 @@ unset($__errorArgs, $__bag); ?>
             <div class="modal-header">
                 <h5 class="modal-title">Download PDF</h5>
             </div>
-            <form action="<?php echo e(route('cetakBukuTamuBerdasarkanPilihan')); ?>" class="d-flex flex-column">
+            <form action="<?php echo e(route('cetakExcelBukuTamuBerdasarkanFilter')); ?>" class="d-flex flex-column">
                 <div class="modal-body">
                     <div class="form-group mx-2">
                         <label for="tanggal_mulai text-muted">Mulai tanggal</label>
