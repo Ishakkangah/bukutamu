@@ -10,7 +10,7 @@
             <div class="section-header py-2 rounded">
                 <div class="container px-5 py-2 mb-5 mt-5" style="background: url('{{ asset('img/leaves.webp') }}')">
 
-                    <h3 class="mb-5"><i class="bi bi-person-plus-fill"></i> MOHAN ISI DAFTAR PENGUNJUNG</h3>
+                    <h3 class="mb-5"><i class="bi bi-person-plus-fill"></i> MOHON ISI DAFTAR PENGUNJUNG</h3>
                     @include('components.alertForm')
                     <form action="{{ route('store') }}" method="post" enctype="multipart/form-data" class=""
                         autocomplete="off">

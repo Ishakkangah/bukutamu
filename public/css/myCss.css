@@ -1,3 +1,11 @@
+main {
+    display: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+}
+
 .card_ku {
     background: linear-gradient(to right, #0e567c, #80a5b8);
     display: flex;

@@ -8,7 +8,7 @@
             <div class="px-4 section-header bg-white py-2 rounded">
                 <div class="container my-3 mb-5">
                     @include('components.title')
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
                         <div>
                             @if ($tanggal_mulai && $sampai_tanggal)
                                 <h6 class="text-muted">{{ Carbon\Carbon::parse($tanggal_mulai)->format('d-M-Y') }} -
@@ -19,45 +19,41 @@
                                 </h6>
                             @endif
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-2">
                         <div>
+                            @if (auth()->user()->role_id === 2 || auth()->user()->role_id === 3)
+                                <div
+                                    class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end">
+                                    <form action="{{ route('cetakBukuTamuBerdasarkanPilihan') }}" class="d-flex">
+                                        <div class="form-group mx-2">
+                                            <label for="tanggal_mulai text-muted">Mulai tanggal</label>
+                                            <input type="date" class="form-control" id="tanggal_mulai"
+                                                name="tanggal_mulai" value="{{ old('tanggal_mulai') }}">
+                                            @error('tanggal_mulai')
+                                                <small class="text-danger">
+                                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                                    </div>
+                                                </small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mx-2">
+                                            <label for="sampai_tanggal text-muted">Sampai tanggal</label>
+                                            <input type="date" class="form-control" id="sampai_tanggal"
+                                                name="sampai_tanggal" value="{{ old('sampai_tanggal') }}">
+                                            @error('sampai_tanggal')
+                                                <small class="text-danger">
+                                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                                    </div>
+                                                </small>
+                                            @enderror
+                                        </div>
 
-                            <a href="/" class="card-link btn btn-primary ">
-                                Kembali</a>
-                        </div>
-                        <div>
-                            <div class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end">
-                                <form action="{{ route('cetakBukuTamuBerdasarkanPilihan') }}" class="d-flex">
-                                    <div class="form-group mx-2">
-                                        <label for="tanggal_mulai text-muted">Mulai tanggal</label>
-                                        <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai"
-                                            value="{{ old('tanggal_mulai') }}">
-                                        @error('tanggal_mulai')
-                                            <small class="text-danger">
-                                                <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
-                                                </div>
-                                            </small>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group mx-2">
-                                        <label for="sampai_tanggal text-muted">Sampai tanggal</label>
-                                        <input type="date" class="form-control" id="sampai_tanggal" name="sampai_tanggal"
-                                            value="{{ old('sampai_tanggal') }}">
-                                        @error('sampai_tanggal')
-                                            <small class="text-danger">
-                                                <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
-                                                </div>
-                                            </small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group mx-2 d-flex flex-column justify-content-end">
-                                        <button type="submit" class="btn btn-primary shadow">
-                                            <i class="bi bi-printer-fill"></i> CETAK PDF</button>
-                                    </div>
-                                </form>
-                            </div>
+                                        <div class="form-group mx-2 d-flex flex-column justify-content-end">
+                                            <button type="submit" class="btn btn-primary shadow">
+                                                <i class="bi bi-printer-fill"></i> CETAK PDF</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                             <div class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end"
                                 id="tampilkanBukuTamuBerdasarkanFilter">
                                 <form action="{{ route('tampilkanBukuTamuBerdasarkanFilter') }}" class="d-flex">

@@ -5,7 +5,7 @@
             <form class="form-inline mr-auto">
                 <ul class="navbar-nav mr-3">
                     <li>
-                        <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                        <a href="/" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
                     </li>
                 </ul>
             </form>
@@ -35,11 +35,11 @@
         <div class="main-sidebar sidebar-style-2">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand mt-2">
-                    <a href="#"><img src="<?php echo e(asset('img/logo_kominfo1.png')); ?>" alt="diskomimfo_oki"
+                    <a href="/"><img src="<?php echo e(asset('img/logo_kominfo1.png')); ?>" alt="diskomimfo_oki"
                             width="180px" /></a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="#"><img src="<?php echo e(asset('img/logo_pemda.png')); ?>" alt="diskomimfo_oki"
+                    <a href="/"><img src="<?php echo e(asset('img/logo_pemda.png')); ?>" alt="diskomimfo_oki"
                             width="30px" /></a>
                 </div>
                 

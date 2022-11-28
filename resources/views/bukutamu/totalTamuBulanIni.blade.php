@@ -8,7 +8,7 @@
             <div class="px-4 section-header bg-white py-2 rounded">
                 <div class="container my-3 mb-5">
                     @include('components.title')
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between mb-2">
                         <div>
                             <h6 class="text-muted">{{ $hariPertama->format('d-M-Y') }} -
                                 {{ $hariTerakhir->format('d-M-Y') }}
@@ -17,14 +17,12 @@
                                 Total : {{ $data->count() }}
                             </h6>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <a href="/" class="card-link btn btn-primary ">
-                            Kembali</a>
-                        @if (auth()->user()->role_id === 2 || auth()->user()->role_id == 3)
-                            <a href="{{ route('cetakBukuTamuMingguIni') }}" class="btn btn-primary shadow">
-                                <i class="bi bi-printer-fill"></i> Cetak PDF</a>
-                        @endif
+                        <div>
+                            @if (auth()->user()->role_id === 2 || auth()->user()->role_id == 3)
+                                <a href="{{ route('cetakBukuTamuMingguIni') }}" class="btn btn-primary shadow">
+                                    <i class="bi bi-printer-fill"></i> Cetak PDF</a>
+                            @endif
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover rounded overflow-hidden">

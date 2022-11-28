@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\cetakPengunjungBerdasakanFilter;
+use App\Exports\cetakPengunjungBerdasakanHariIni;
+use App\Exports\cetakPengunjungBerdasakanMinggu;
 use App\Models\{bukutamu, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BukutamuController extends Controller
 {
@@ -264,5 +268,24 @@ class BukutamuController extends Controller
             'sampai_tanggal' => $sampai_tanggal,
         ])->setPaper('a4', 'landscape');
         return $pdf->download('laporan-buku-tamu.pdf');
+    }
+
+
+    // CETAK EXCEL BERDASARKAN HARI INI
+    public function exportExcelHariIni()
+    {
+        return Excel::download(new cetakPengunjungBerdasakanHariIni, 'tamuHariIni.xlsx');
+    }
+
+    // CETAK EXCEL BERDASARKAN MINGGU INI
+    public function cetakPengunjungBerdasakanMinggu()
+    {
+        return Excel::download(new cetakPengunjungBerdasakanMinggu, 'tamuMingguIni.xlsx');
+    }
+
+    // CETAK EXCEL BY FILTER
+    public function cetakBukuTamuBerdasarkanFilter()
+    {
+        return Excel::download(new cetakPengunjungBerdasakanFilter, 'filter.xlsx');
     }
 }

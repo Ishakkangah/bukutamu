@@ -18,8 +18,6 @@
                             </h6>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <a href="/" class="card-link btn btn-primary ">
-                                Kembali</a>
                             <?php if(auth()->user()->role_id === 2 || auth()->user()->role_id == 3): ?>
                                 
                                 <a href="<?php echo e(route('cetakBukuTamuHariIni')); ?>" class="btn btn-primary shadow">

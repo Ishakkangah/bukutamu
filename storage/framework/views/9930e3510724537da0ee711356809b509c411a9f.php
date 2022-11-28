@@ -8,7 +8,7 @@
             <div class="px-4 section-header bg-white py-2 rounded">
                 <div class="container my-3 mb-5">
                     <?php echo $__env->make('components.title', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between mb-2">
                         <div>
                             <h6 class="text-muted"><?php echo e($hariPertama->format('d-M-Y')); ?> -
                                 <?php echo e($hariTerakhir->format('d-M-Y')); ?>
@@ -19,14 +19,12 @@
 
                             </h6>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <a href="/" class="card-link btn btn-primary ">
-                            Kembali</a>
-                        <?php if(auth()->user()->role_id === 2 || auth()->user()->role_id == 3): ?>
-                            <a href="<?php echo e(route('cetakBukuTamuMingguIni')); ?>" class="btn btn-primary shadow">
-                                <i class="bi bi-printer-fill"></i> Cetak PDF</a>
-                        <?php endif; ?>
+                        <div>
+                            <?php if(auth()->user()->role_id === 2 || auth()->user()->role_id == 3): ?>
+                                <a href="<?php echo e(route('cetakBukuTamuMingguIni')); ?>" class="btn btn-primary shadow">
+                                    <i class="bi bi-printer-fill"></i> Cetak PDF</a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover rounded overflow-hidden">
