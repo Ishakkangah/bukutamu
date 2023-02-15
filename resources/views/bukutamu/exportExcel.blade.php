@@ -27,6 +27,10 @@
             </tr>
             <tr style="border: 2px solid">
                 <th style="text-align: center; background-color: yellow;"><strong>NAMA</strong></th>
+                <th style="text-align: center; background-color: yellow;"><strong>USIA</strong></th>
+                <th style="text-align: center; background-color: yellow;"><strong>JENIS KELAMIN</strong></th>
+                <th style="text-align: center; background-color: yellow;"><strong>PEKERJAAN</strong></th>
+                <th style="text-align: center; background-color: yellow;"><strong>PENDIDIKAN</strong></th>
                 <th style="text-align: center; background-color: yellow;"><strong>INSTANSI</strong>
                 </th>
                 <th style="text-align: center; background-color: yellow;"><strong>PERIHAL</strong>
@@ -42,6 +46,10 @@
             @foreach ($bukutamus as $b)
                 <tr>
                     <td style="text-align: center">{{ $b->name }}</td>
+                    <td style="text-align: center">{{ $b->usia }}</td>
+                    <td style="text-align: center">{{ $b->jenis_kelamin }}</td>
+                    <td style="text-align: center">{{ $b->pekerjaan }}</td>
+                    <td style="text-align: center">{{ $b->pendidikan }}</td>
                     <td style="text-align: center">{{ $b->instansi }}</td>
                     <td style="text-align: center">{{ $b->perihal }}</td>
                     <td style="text-align: center">{{ $b->tujuan }}</td>

@@ -15,7 +15,6 @@
         <main>
             @yield('content')
         </main>
-
     </div>
 </body>
 @extends('links.link_footer')

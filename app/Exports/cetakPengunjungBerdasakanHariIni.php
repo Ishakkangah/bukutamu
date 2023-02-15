@@ -15,7 +15,7 @@ class cetakPengunjungBerdasakanHariIni implements FromView, WithEvents, WithDraw
 {
     public function view(): View
     {
-        $bukutamus = bukutamu::where('created_at', Carbon::now())->latest()->get();
+        $bukutamus = bukutamu::whereDate('created_at', Carbon::now())->latest()->get();
         return view('bukutamu.exportExcel
         ', compact('bukutamus'));
     }

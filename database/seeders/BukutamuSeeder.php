@@ -19,7 +19,11 @@ class BukutamuSeeder extends Seeder
       'instansi' => 'TESTING INSTANSI',
       'perihal' => 'TESTING PERIHAL',
       'tujuan' => 'TESTING TUJUAN',
-      'keterangan' => 'TESTING KET'
+      'usia' => 30,
+      'jenis_kelamin' => 'TESTING JENIS_KELAMIN',
+      'pendidikan' => 'TESTING PENDIDIKAN',
+      'pekerjaan' => 'TESTING PEKERJAAN',
+      'keterangan' => 'TESTING KETERANGAN'
     ]);
   }
 }

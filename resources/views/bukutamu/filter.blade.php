@@ -20,7 +20,7 @@
                             @endif
                         </div>
                         <div>
-                            @if (auth()->user()->role_id === 2 || auth()->user()->role_id === 3)
+                            {{-- @if (auth()->user()->role_id === 2 || auth()->user()->role_id === 3)
                                 <div
                                     class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end">
                                     <form action="{{ route('cetakBukuTamuBerdasarkanPilihan') }}" class="d-flex">
@@ -53,7 +53,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            @endif
+                            @endif --}}
                             <div class="col-auto mx-0 px-0 d-flex align-items-center border-dark mb-2 justify-content-end"
                                 id="tampilkanBukuTamuBerdasarkanFilter">
                                 <form action="{{ route('tampilkanBukuTamuBerdasarkanFilter') }}" class="d-flex">
@@ -69,8 +69,8 @@
                                     </div>
 
                                     <div class="form-group mx-2 d-flex flex-column justify-content-end">
-                                        <button type="submit" class="btn btn-info shadow" id="tampilkanFilter">
-                                            <i class="bi bi-eye-fill"></i> TAMPILKAN</button>
+                                        <button type="submit" class="btn btn-info shadow mb-1" id="tampilkanFilter">
+                                            TAMPILKAN DATA</button>
                                     </div>
                                 </form>
                             </div>

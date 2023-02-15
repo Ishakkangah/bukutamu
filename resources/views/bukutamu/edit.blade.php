@@ -22,6 +22,52 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="usia" class="form-label text-muted">USIA</label>
+                            <input type="text" class="form-control" name="usia" id="usia "
+                                value="{{ old('usia') ?? $datatamus->usia }}" placeholder="Masukan usia">
+                            @error('usia')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="jenis_kelamin" class="form-label text-muted">JENIS KELAMIN</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required="required">
+                                <option disabled selected>Jenis Kelamin</option>
+
+                                <option value="laki-laki" {{ $datatamus->jenis_kelamin == 'laki-laki' ? 'selected' : '' }}>
+                                    Laki-Laki</option>
+                                <option value="perempuan" {{ $datatamus->jenis_kelamin == 'perempuan' ? 'selected' : '' }}>
+                                    Perempuan</option>
+                            </select>
+                            @error('jenis_kelamin')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="pendidikan" class="form-label text-muted">PENDIDIKAN</label>
+                            <input type="text" class="form-control" name="pendidikan" id="pendidikan"
+                                value="{{ old('pendidikan') ?? $datatamus->pendidikan }}" placeholder="Masukan pendidikan">
+                            @error('pendidikan')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="pekerjaan" class="form-label text-muted">PEKERJAAN</label>
+                            <input type="text" class="form-control" name="pekerjaan" id="pekerjaan"
+                                value="{{ old('pekerjaan') ?? $datatamus->pekerjaan }}" placeholder="Masukan pekerjaan">
+                            @error('usia')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="instansi" class="form-label  text-muted">INSTANSI</label>
                             <input type="text" class="form-control" id="instansi" name="instansi"
                                 placeholder="Masukan instansi" value="{{ old('instansi') ?? $datatamus->instansi }}">
@@ -43,8 +89,29 @@
                         </div>
                         <div class="mb-3">
                             <label for="tujuan" class="form-label  text-muted">TUJUAN</label>
-                            <input type="text" class="form-control" id="tujuan" name="tujuan"
-                                placeholder="Masukan tujuan" value="{{ old('tujuan') ?? $datatamus->tujuan }}">
+                            <select type="text" class="form-control" id="tujuan" name="tujuan"
+                                value="{{ old('tujuan') }}" required="required">
+                                <option disabled selected>Pilih tujuan</option>
+                                <option value="Kepala Dinas" {{ $datatamus->tujuan == 'Kepala Dinas' ? 'selected' : '' }}>
+                                    Kepala Dinas</option>
+                                <option value="Sekretaris" {{ $datatamus->tujuan == 'Sekretaris' ? 'selected' : '' }}>
+                                    Sekretaris</option>
+                                <option value="Sekretariat" {{ $datatamus->tujuan == 'Sekretariat' ? 'selected' : '' }}>
+                                    Sekretariat</option>
+                                <option value="Bidang Layanan E-Goverment"
+                                    {{ $datatamus->tujuan == 'Bidang Layanan E-Goverment' ? 'selected' : '' }}>Bidang
+                                    Layanan E-Goverment</option>
+                                <option value="Bidang Statistik & PIP"
+                                    {{ $datatamus->tujuan == 'Bidang Statistik & PIP' ? 'selected' : '' }}>Bidang
+                                    Statistik & PIP</option>
+                                <option value="Bidang TIK" {{ $datatamus->tujuan == 'Bidang TIK' ? 'selected' : '' }}>
+                                    Bidang TIK</option>
+                                <option value="Bidang PKP" {{ $datatamus->tujuan == 'Bidang PKP' ? 'selected' : '' }}>
+                                    Bidang PKP</option>
+                                <option value="Bidang Persandian"
+                                    {{ $datatamus->tujuan == 'Bidang Persandian' ? 'selected' : '' }}>Bidang
+                                    Persandian</option>
+                            </select>
                             @error('tujuan')
                                 <small class="text-danger">
                                     <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}</div>

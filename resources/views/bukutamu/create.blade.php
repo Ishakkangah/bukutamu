@@ -38,6 +38,54 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <input type="number" class="form-control" id="usia" name="usia" required
+                                placeholder="usia" value="{{ old('usia') }}">
+                            @error('usia')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                    </div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control"
+                                value="{{ old('jenis_kelamin') }}" required="required">
+                                <option disabled selected>Jenis Kelamin</option>
+                                <option value="laki-laki" {{ old('jenis_kelamin' == 'laki-laki' ? 'selected' : '') }}>
+                                    Laki-Laki</option>
+                                <option value="perempuan" {{ old('jenis_kelamin' == 'perempuan' ? 'selected' : '') }}>
+                                    Perempuan</option>
+                            </select>
+                            @error('jenis_kelamin')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+                                    </div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="pendidikan" name="pendidikan" required
+                                placeholder="pendidikan" value="{{ old('pendidikan') }}">
+                            @error('pendidikan')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+
+                                    </div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" required
+                                placeholder="perkerjaan" value="{{ old('perkerjaan') }}">
+                            @error('pekerjaan')
+                                <small class="text-danger">
+                                    <div class="bg-danger rounded text-white mt-1 px-2 py-2">{{ $message }}
+
+                                    </div>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <input type="text" class="form-control" id="perihal" name="perihal" placeholder="Perihal"
                                 value="{{ old('perihal') }}" required>
                             @error('perihal')
@@ -88,6 +136,7 @@
                                 </small>
                             @enderror
                         </div>
+
                         {{-- Start modal camera --}}
                         <div class="modal" tabindex="-1" id="cameraModal">
                             <div class="modal-dialog">
