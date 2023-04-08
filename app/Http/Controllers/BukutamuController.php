@@ -146,7 +146,7 @@ class BukutamuController extends Controller
     }
 
     // DETAIL DATA TAMU
-    public function detailsTamu(bukutamu $bukutamu)
+    public function detail(bukutamu $bukutamu)
     {
         $dataTamu = bukutamu::where('id', $bukutamu->id)->first();
         return view('bukutamu.detailsTamu', compact('dataTamu'));
@@ -203,7 +203,7 @@ class BukutamuController extends Controller
 
 
     // TOTAL TAMU HARI INI
-    function totalTamuHariIni(Request $request)
+    function tamu_hari(Request $request)
     {
         $data = bukutamu::select(
             'id',
@@ -223,7 +223,7 @@ class BukutamuController extends Controller
     }
 
     // CETAK BUKU TAMU HARI INI PDF
-    function cetakDaftarTamuHariIni_PDF()
+    function pdf_hari()
     {
         $data = bukutamu::select(
             'id',
@@ -247,7 +247,7 @@ class BukutamuController extends Controller
 
 
     // TOTAL TAMU MINGGU INI
-    function totalTamuMingguIni(Request $request)
+    function tamu_minggu(Request $request)
     {
         $data = bukutamu::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->latest()->select(
             'id',
@@ -270,7 +270,7 @@ class BukutamuController extends Controller
 
 
     // CETAK BUKU TAMU MINGGU INI PDF
-    function cetakBukuTamuMingguIni()
+    function pdf_minggu()
     {
         $data = bukutamu::whereBetween(
             'created_at',
@@ -304,7 +304,7 @@ class BukutamuController extends Controller
     }
 
     // FILTER BUKU TAMU
-    function filterTamu(Request $request)
+    function filter(Request $request)
     {
         $data = bukutamu::latest()
             ->select(
@@ -329,7 +329,7 @@ class BukutamuController extends Controller
         ]);
     }
 
-    function tampilkanBukuTamuBerdasarkanFilter(Request $request)
+    function by_filter(Request $request)
     {
         $tanggal_mulai =  $request->tanggal_mulai;
         $sampai_tanggal =  $request->sampai_tanggal;
@@ -347,7 +347,7 @@ class BukutamuController extends Controller
     }
 
     // CETAK BUKU TAMU BERDASARKAN PILIHAN 
-    function cetakBukuTamuBerdasarkanPilihan(Request $request)
+    function pdf_pilihan(Request $request)
     {
         $request->validate([
             'tanggal_mulai' => 'required|date',
@@ -391,19 +391,19 @@ class BukutamuController extends Controller
 
 
     // CETAK EXCEL BERDASARKAN HARI INI
-    public function exportExcelHariIni()
+    public function excel_hari()
     {
         return Excel::download(new cetakPengunjungBerdasakanHariIni, 'tamuHariIni.xlsx');
     }
 
     // CETAK EXCEL BERDASARKAN MINGGU INI
-    public function cetakPengunjungBerdasakanMinggu()
+    public function excel_minggu()
     {
         return Excel::download(new cetakPengunjungBerdasakanMinggu, 'tamuMingguIni.xlsx');
     }
 
     // CETAK EXCEL BY FILTER
-    public function cetakBukuTamuBerdasarkanFilter()
+    public function excel_filter()
     {
         return Excel::download(new cetakPengunjungBerdasakanFilter, 'filter.xlsx');
     }

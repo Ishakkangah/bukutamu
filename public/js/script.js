@@ -3,9 +3,11 @@ const bukaKamera = document.querySelector(".bukaKamera");
 // BUKA KAMERA
 function buka_kamera() {
     bukaKamera.classList.replace("tampilKamera", "hilangkanKamera");
-    document.body
-        .querySelector(".modal")
-        .classList.replace("d-none", "d-block");
+    const modal = document.body.querySelector("#cameraModal");
+    if (!modal.classList.contains("show")) {
+        modal.classList.add("show");
+        modal.classList.remove("d-none");
+    }
     Webcam.set({
         width: 439,
         height: 430,
@@ -27,22 +29,19 @@ function ambil_photo() {
         document.getElementById("results").innerHTML = `
         <img width="100px" style="object-fit:cover; object-position:center; border-radius: 5px;" src="${data_uri}" alt="Preview Photo">
         `;
-        document.body
-            .querySelector(".modal")
-            .classList.replace("d-block", "d-none");
+        const modal = document.body.querySelector("#cameraModal");
+        if (modal.classList.contains("show")) {
+            modal.classList.remove("show");
+        }
+        bukaKamera.classList.replace("hilangkanKamera", "tampilKamera");
     });
     Webcam.reset();
 }
 
-document.body.addEventListener("click", function (e) {
-    if (e.target.classList.contains("btnBatalAmbilGambarWebcam")) {
-        Webcam.reset();
-        document.body
-            .querySelector(".modal")
-            .classList.replace("d-block", "d-none");
-        bukaKamera.classList.replace("hilangkanKamera", "tampilKamera");
-    }
-});
+function batal_ambil_gambar() {
+    Webcam.reset();
+    bukaKamera.classList.replace("hilangkanKamera", "tampilKamera");
+}
 
 const btnSimpanPoto = document.getElementById("btnSimpanPoto");
 btnSimpanPoto.addEventListener("click", function () {

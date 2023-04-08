@@ -1,35 +1,35 @@
 <?php
 
 use App\Http\Controllers\BukutamuController;
-use App\Models\bukutamu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('cari', [BukutamuController::class, 'cari'])->name('cari');
-Route::get('/', [BukutamuController::class, 'index']);
-Route::patch('/store', [BukutamuController::class, 'store'])->name('store');
+Route::get('cari',                          [BukutamuController::class, 'cari'])->name('cari');
+Route::get('/',                             [BukutamuController::class, 'index']);
+Route::patch('store',                       [BukutamuController::class, 'store'])->name('store');
+
 Route::prefix('bukutamu')->middleware('auth')->group(function () {
-    Route::get('/create', [BukutamuController::class, 'create'])->name('create');
-    Route::get('/{bukutamu:id}/edit', [BukutamuController::class, 'edit'])->name('edit');
-    Route::patch('/{bukutamu:id}/edit', [BukutamuController::class, 'update'])->name('update');
-    Route::delete('/{bukutamu:id}/delete', [BukutamuController::class, 'destroy'])->name('delete');
-    Route::get('/{bukutamu:id}/detailsTamu', [BukutamuController::class, 'detailsTamu'])->name('detailsTamu');
+    // ADMIN
+    Route::get('create',                    [BukutamuController::class, 'create'])->name('create');
+    Route::get('{bukutamu:id}/edit',        [BukutamuController::class, 'edit'])->name('edit');
+    Route::get('{bukutamu:id}/detail',      [BukutamuController::class, 'detail'])->name('detailsTamu');
+    Route::patch('{bukutamu:id}/edit',      [BukutamuController::class, 'update'])->name('update');
+    Route::delete('{bukutamu:id}/delete',   [BukutamuController::class, 'destroy'])->name('delete');
 
     //    DOWNLOAD PDF
-    Route::get('/totalTamuHariIni', [BukutamuController::class, 'totalTamuHariIni'])->name('totalTamuHariIni');
-    Route::get('/cetakBukuTamuHariIni/cetak_pdf', [BukutamuController::class, 'cetakDaftarTamuHariIni_PDF'])->name('cetakBukuTamuHariIni');
-    Route::get('/totalTamuMingguIni', [BukutamuController::class, 'totalTamuMingguIni'])->name('totalTamuBulanIni');
-    Route::get('/cetakBukuTamuMingguIni/cetak_pdf', [BukutamuController::class, 'cetakBukuTamuMingguIni'])->name('cetakBukuTamuMingguIni');
-    Route::get('filterTamu', [BukutamuController::class, 'filterTamu'])->name('filterTamu');
-    Route::get('tampilkanBukuTamuBerdasarkanFilter', [BukutamuController::class, 'tampilkanBukuTamuBerdasarkanFilter'])->name('tampilkanBukuTamuBerdasarkanFilter');
-    Route::get('cetakBukuTamuBerdasarkanPilihan', [BukutamuController::class, 'cetakBukuTamuBerdasarkanPilihan'])->name('cetakBukuTamuBerdasarkanPilihan');
+    Route::get('total/hari',                [BukutamuController::class, 'tamu_hari'])->name('totalTamuHariIni');
+    Route::get('total/Minggu',              [BukutamuController::class, 'tamu_minggu'])->name('totalTamuBulanIni');
+    Route::get('total/filter',              [BukutamuController::class, 'filter'])->name('filterTamu');
+    Route::get('filter/tampil',             [BukutamuController::class, 'by_filter'])->name('tampilkanBukuTamuBerdasarkanFilter');
+    Route::get('pdf/hari)',                 [BukutamuController::class, 'pdf_hari'])->name('cetakBukuTamuHariIni');
+    Route::get('pdf/minggu',                [BukutamuController::class, 'pdf_minggu'])->name('cetakBukuTamuMingguIni');
+    Route::get('pdf/pilihan',               [BukutamuController::class, 'pdf_pilihan'])->name('cetakBukuTamuBerdasarkanPilihan');
 
     //    DOWNLOAD EXCEL
-    Route::get('exportExcelHariIni', [BukutamuController::class, 'exportExcelHariIni'])->name('exportExcelHariIni');
-    Route::get('exportExcelMingguIni', [BukutamuController::class, 'cetakPengunjungBerdasakanMinggu'])->name('exportExcelMungguIni');
-    Route::get('exportExcelByFilter', [BukutamuController::class, 'exportExcelByFilter'])->name('exportExcelByFilter');
-    Route::get('cetakBukuTamuBerdasarkanFilter', [BukutamuController::class, 'cetakBukuTamuBerdasarkanFilter'])->name('cetakExcelBukuTamuBerdasarkanFilter');
+    Route::get('Excel/Hari',                [BukutamuController::class, 'excel_hari'])->name('exportExcelHariIni');
+    Route::get('Excel/Minggu',              [BukutamuController::class, 'excel_minggu'])->name('exportExcelMungguIni');
+    Route::get('Excel/By-Filter',           [BukutamuController::class, 'excel_filter'])->name('cetakExcelBukuTamuBerdasarkanFilter');
 });
 Auth::routes(['register' => false]);
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

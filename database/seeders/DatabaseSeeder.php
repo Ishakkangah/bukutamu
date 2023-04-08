@@ -10,6 +10,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(BukutamuSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(roleSeeder::class);
+        $this->call(RoleSeeder::class);
     }
 }
